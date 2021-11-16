@@ -1,0 +1,27 @@
+@import '../../constant/variable';
+.verify{
+    input{
+        width: 50px;
+        height: 50px;
+        padding: $sm-pd;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        outline: none;
+        text-align: center;
+        font-size: 22px;
+        background: transparent;
+        color: var(--black);
+        &:hover{
+            background: transparent;
+            color: var(--black);
+        }
+        margin: 0 $sm-mg;
+    }
+}
+
+.filled{
+    input{
+        background: var(--btn-quantity);
+        color: var(--white);
+    }
+}

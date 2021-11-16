@@ -1,0 +1,16 @@
+@import '../../constant/variable';
+.form{
+    max-width: 100%;
+    padding: 15px;
+    margin-bottom: 0;
+}
+.button{
+    background: var(--btn-hover) !important;
+    color: $white !important;
+}
+
+@media screen and (max-width: 768px) {
+    .form{
+        margin-bottom: $lg-mg;
+    }
+}

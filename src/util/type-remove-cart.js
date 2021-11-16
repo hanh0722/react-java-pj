@@ -1,0 +1,5 @@
+export const TYPE_ACTIONS = {
+  REMOVE: "REMOVE",
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+};

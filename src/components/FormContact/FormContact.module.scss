@@ -1,0 +1,13 @@
+@import '../constant/variable';
+.btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.title{
+    text-align: center;
+}
+.button{
+    background: var(--btn-hover) !important;
+    color: $white !important;
+}

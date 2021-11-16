@@ -1,0 +1,55 @@
+@import '../constant/variable';
+.hamburger{
+    div{
+        width: 25px;
+        height: 2px;
+        background: var(--black);
+        margin: 4px 0px;
+        transition: transform .5s;
+    }
+    cursor: pointer;
+    display: none;
+    z-index: 5;
+}
+.transform__origin{
+    div{
+        &:first-child{
+            transform: rotate(45deg) translateY(8px);
+        }
+        &:nth-child(2){
+            visibility: hidden;
+        }
+        &:last-child{
+            transform: rotate(-45deg) translateY(-8px);
+        }
+    }
+}
+.absolute-btn{
+    div{
+        background: var(--black);
+    }
+}
+@media screen and (max-width: 991px){
+    .hamburger{
+        display: $block;
+    }
+}
+@media screen and (max-width: 576px) {
+    .hamburger{
+        div{
+            width: 20px;
+            height: 1px;
+            
+        }
+    }
+    .transform__origin{
+        div{
+            &:first-child{
+                transform: rotate(45deg) translateY(7px);
+            }
+            &:last-child{
+                transform: rotate(-45deg) translateY(-7px);
+            }
+        }
+    }
+}

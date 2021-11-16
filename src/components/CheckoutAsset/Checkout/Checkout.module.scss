@@ -1,0 +1,16 @@
+@import '../../constant/variable';
+.user--infor{
+    h3{
+        font-size: 22px;
+        padding-bottom: 35px;
+    }
+}
+.text{
+    font-size: $fs-sm;
+    color: red !important;
+}
+@media screen and (max-width: 768px) {
+    .user--infor{
+        flex-direction: column-reverse !important;
+    }
+}

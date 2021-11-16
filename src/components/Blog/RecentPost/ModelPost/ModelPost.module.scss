@@ -1,0 +1,35 @@
+@import "../../../constant/variable";
+.post {
+  line-height: 30px;
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  font-size: $fs-sm;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  .content {
+    grid-column: 2/-1;
+  }
+  align-items: center;
+  a {
+    text-decoration: none;
+    color: var(--black) !important;
+    @include show-n-line(2);
+    font-weight: bold;
+    line-height: 25px;
+  }
+  p {
+    text-transform: uppercase;
+  }
+}
+@media screen and (max-width: 991px) {
+  .post {
+    grid-template-columns: repeat(1, 1fr);
+    .content {
+      grid-column: auto;
+    }
+  }
+}

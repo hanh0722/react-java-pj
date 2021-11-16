@@ -1,0 +1,36 @@
+@import '../../constant/variable';
+.category{
+    h5{
+        font-size: 16px;
+        font-weight: bold;
+        padding-bottom: $lg-pd;
+    }
+    line-height: 40px;
+    ul{
+        list-style: none;
+        padding-left: 0%;
+        a{
+            text-decoration: none;
+            color: var(--black) !important;
+            transition: all .35s ease-in-out;
+            &:hover{
+                color: $brown !important;
+                &::before{
+                    width: 100%;
+                }
+            }
+            font-size: $fs-sm;
+            padding-bottom: 5px;
+            position: relative;
+            &::before{
+                content: '';
+                position: absolute;
+                bottom: 0;
+                width: 0;
+                height: 1px;
+                background: var(--black);
+                transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+            }
+        }
+    }
+}

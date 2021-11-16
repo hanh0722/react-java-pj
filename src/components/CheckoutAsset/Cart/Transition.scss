@@ -1,0 +1,18 @@
+.open--voucher-enter{
+    transform: scale(0);
+    opacity: 0;
+}
+.open--voucher-enter-active{
+    transform: scale(1);
+    opacity: 1;
+    transition: all .5s ease-in-out;
+}
+.open--voucher-exit{
+    transform: scale(1);
+    opacity: 1;
+}
+.open--voucher-exit-active{
+    transform: scale(0);
+    opacity: 0;
+    transition: all .5s ease-in-out;
+}

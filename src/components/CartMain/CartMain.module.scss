@@ -1,0 +1,118 @@
+@import '../constant/variable';
+.cart{
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: var(--white);
+    width: 30%;
+    z-index: 10;
+    height: 100%;
+    opacity: 0;
+    z-index: 25;
+    transition: all .5s ease;
+    path{
+        fill: var(--black);
+    }
+    transform: translateX(100%);
+    .title{
+        padding: $md-pd;
+        border-bottom: 1px solid var(--border-color);
+        letter-spacing: 1px;
+        font-size: $fs-md;
+        text-transform: uppercase;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.cart__back{
+    transform: translateX(0%);
+    opacity: 1;
+}
+.coupon{
+    box-shadow: $sm-shadow;
+    padding: $md-pd;
+    line-height: 30px;
+    cursor: pointer;
+}
+.cart__items{
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 $md-pd;
+}
+.checkout{
+    padding: $md-pd;
+    background: var(--checkout-bg);
+    button{
+        width: 100%;
+        background: var(--color-button);
+        color: $white;
+        &:hover{
+            background: var(--color-button);
+            box-shadow: $md-shadow;
+        }
+    }
+}
+.checkout__box{
+    width: 100%;
+    bottom: 0;
+}
+.bg__overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    background: var(--backdrop);
+}
+body[data-theme='dark']{
+    .coupon{
+        border: 1px solid var(--black);
+    }
+}
+.loading-cart{
+    height: 200px;
+}
+.image-loading{
+    width: 100px;
+    height: 100px;
+}
+.container-loading{
+    width: calc(100% - 120px);
+}
+.voucher--loading{
+    padding: 50px 0;
+    max-width: 300px;
+    margin: 0 auto;
+}
+.check-loading{
+    div{
+        &:last-child{
+            height: 20px;
+            margin: 20px auto 0 auto;
+            border-radius: 5px;
+        }
+    }
+}
+@media screen and (max-width: 1320px) {
+    .cart{
+        width: 35%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .cart{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 768px){
+    .cart{
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 576px){
+    .cart{
+        width: 90%;
+    }
+}

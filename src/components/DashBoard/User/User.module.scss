@@ -1,0 +1,51 @@
+@import '../../constant/variable';
+.user{
+    img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    transition: all .5s ease-in-out;
+    .content{
+        a{
+            padding: 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        transition: all .5s ease-in-out;
+        padding-left: $md-pd;
+        font-size: 12px;
+        line-height: 25px;
+    }
+    padding: $md-pd;
+    background: var(--light-gray);
+    margin: $md-mg;
+    border-radius: 10px;
+    color: var(--black);
+    .flow{
+        overflow: hidden;
+    }
+    .email{
+        font-size: 10px;
+        word-break: break-all;
+        line-height: normal;
+    }
+    .role{
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
+.back{
+    background: transparent;
+    .flow{
+        padding: 0;
+    }
+    .content{
+        padding: 0;
+        width: 0;
+    }
+    justify-content: center;
+}
+.skeleton{
+    width: calc(100% - 65px);
+}

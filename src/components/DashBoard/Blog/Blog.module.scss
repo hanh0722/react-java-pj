@@ -1,0 +1,10 @@
+@import '../../constant/variable';
+.container{
+    max-width: 100%;
+    label{
+        font-size: $fs-sm;
+        padding-bottom: $sm-pd !important;
+        cursor: default;
+    }
+
+}

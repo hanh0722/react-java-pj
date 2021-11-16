@@ -1,0 +1,36 @@
+@import '../constant/variable';
+.container{
+    z-index: 15;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--search-bg);
+}
+.row{
+    padding-bottom: $md-pd;
+    text-transform: $capitalize;
+}
+.grid__layout{
+    padding: $lg-pd;
+}
+.items{
+    padding: 0 0 $md-pd 0;
+    margin-top: $md-pd;
+}
+.flow__items{
+    overflow-x: hidden;
+}
+.title{
+    font-size: $fs-sm;
+}
+@media screen and (max-width: 991px) {
+    .items{
+        height: 50vh;
+        overflow: scroll;
+    }
+}
+@media screen and (max-width: 768px) {
+    .items{
+        height: 70vh;
+    }
+}

@@ -1,0 +1,15 @@
+@import '../../../constant/variable';
+@import '../../../../theme/mixin';
+.container{
+    margin-top: 40px;
+    .title{
+        @include title-dashboard();
+        font-size: $fs-sm;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+}
+.grid{
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+}

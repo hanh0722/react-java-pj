@@ -1,0 +1,35 @@
+@import '../constant/variable';
+.box{
+    padding: 50px $md-pd;
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: var(--white);
+    input{
+        width: 100%;
+        padding: 6px 16px;
+    }
+    box-shadow: $sm-shadow;
+    button{
+        margin-top: 20px;
+        width: 100%;
+        background: var(--color-button);
+        color: $white;
+        &:hover{
+            background: var(--color-button);
+        }
+    }
+}
+body[data-theme='dark']{
+    .box{
+        border: 1px solid var(--black);
+    }
+}
+.title{
+    span{
+        margin-left: 15px;
+    }
+    text-transform: capitalize;
+    padding-bottom: 10px;
+}

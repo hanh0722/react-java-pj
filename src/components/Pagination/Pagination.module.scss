@@ -1,0 +1,53 @@
+@import "../constant/variable";
+.pagination {
+  list-style: none;
+  li, .prev, .next {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow);
+    font-size: $fs-md;
+    margin-right: $md-mg;
+    &:last-child {
+      margin-right: 0;
+    }
+    cursor: pointer;
+    border-radius: 50%;
+    font-weight: bold;
+    transition: all 0.15s ease-in-out;
+    color: var(--black);
+    &:hover {
+      background: $brown;
+      a{
+        color: $white;
+      }
+      svg{
+          color: $white;
+      }
+    }
+    a{
+        color: var(--black);
+        transition: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+  }
+  svg{
+      font-size: $fs-md;
+  }
+  .active{
+    background: $brown !important;
+    a{
+        color: $white !important;
+    }
+  }
+}
+.disabled{
+  pointer-events: none;
+  opacity: .5;
+}

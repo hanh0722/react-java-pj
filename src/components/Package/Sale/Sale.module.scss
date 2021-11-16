@@ -1,0 +1,36 @@
+@import '../../constant/variable';
+.button{
+    button{
+        background: $brown !important;
+        color: $white !important;
+        &:hover{
+            .price{
+                &::before{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+        margin-top: $md-mg;
+    }
+    .price{
+        padding-left: $sm-pd;
+        margin-left: $sm-mg;
+        position: $rl;
+        &::before{
+            transition: all .5s;
+            content: '';
+            position: $ab;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: $white;
+        }
+    }
+    text-align: center;
+}
+@media screen and (max-width: 768px){
+    .sale{
+        text-align: center;
+    }
+}

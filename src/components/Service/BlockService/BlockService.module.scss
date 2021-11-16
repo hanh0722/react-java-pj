@@ -1,0 +1,11 @@
+@import '../../constant/variable';
+.block{
+    width: 20rem;
+    position: relative;
+    background: var(--block-bg);
+    border-radius: 15px;
+    box-shadow: $md-shadow;
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+}

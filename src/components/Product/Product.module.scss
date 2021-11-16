@@ -1,0 +1,112 @@
+@import '../constant/variable';
+.container{
+    img{
+        width: 100%;
+        height: auto;
+        box-shadow: var(--shadow);
+        border-radius: 5px;
+    }
+    a{
+        text-decoration: none;
+        color: var(--black) !important;
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+        transition: all .15s cubic-bezier(0.075, 0.82, 0.165, 1);
+        &:hover{
+            color: $brown !important;
+        }
+    }
+    .item{
+        p{
+            padding-top: 15px;
+            font-size: 14px;
+        }
+        text-transform: capitalize;
+    }
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+    .col{
+        position: relative;
+        .overlay{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0%;
+            background: rgba($color: #000000, $alpha: .25);
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        overflow: hidden;
+        &:hover{
+            .overlay{
+                height: 100%;
+            }
+            .btn{
+                pointer-events: visible;
+                transform: translateY(0);
+            }
+            .icon{
+                transform: translateY(-50%) translateX(0%);
+                pointer-events: visible;
+            }
+        }
+    }
+    .btn{
+        width: 100%;
+        position: absolute;
+        bottom: 10px;
+        button{
+            width: 75%;
+            background: $brown;
+            &:hover{
+                background: $brown;
+            }
+            color: $white;
+        }
+        transform: translateY(150%);
+        pointer-events: none;
+        transition: all .5s;
+    }
+    .icon{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%) translateX(150%);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: $white;
+        font-size: $fs-sm;
+        cursor: pointer;
+        transition: all .5s ease;
+        pointer-events: none;
+        &:hover{
+            background: $brown;
+            color: $white;
+        }
+    }
+}
+.loading{
+    height: 300px !important;
+    width: 100% !important;
+}
+@media screen and (max-width: 576px) {
+    .container{
+        .btn{
+            button{
+                padding: 6px;
+            }
+        }
+        .item{
+            p{
+                padding-top: 10px;
+            }
+        }
+        a{
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.point{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--break-point);
+    font-size: 11px;
+    color: var(--white);
+    font-weight: bold;
+}
+@media screen and (max-width: 991px) {
+    .point{
+        top: -8px;
+        right: -8px;
+    }
+}

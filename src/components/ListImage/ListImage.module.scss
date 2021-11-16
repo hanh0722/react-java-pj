@@ -1,0 +1,43 @@
+.image__content{
+    img{
+        cursor: pointer;
+    }
+}
+
+.normal-loading{
+    width: 100%;
+    height: 400px;
+}
+.image-zoom-loading{
+   @extend .normal-loading;
+}
+.normal-list{
+    width: 100%;
+    height: 120px;
+}
+.image-list{
+    @extend .normal-list;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .image-zoom-loading{
+        height: 300px;
+    }
+    .image-list{
+        height: 80px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .image-zoom-loading{
+        @extend .normal-loading;
+    }
+    .image-list{
+        @extend .normal-list;
+    }
+}

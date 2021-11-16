@@ -1,0 +1,40 @@
+@import '../constant/variable';
+.button{
+    position: relative;
+    cursor: pointer;
+    border: 1px solid var(--black);
+    width: 47px;
+    border-radius: 10px;
+    height: 18px;
+}
+.toggle__btn{
+    position: absolute;
+    left: -3px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    background: $white;
+    border: 1px solid gray;
+    transition: all .3s ease-in-out;
+}
+.icon{
+    svg{
+        font-size: 14px !important;
+        position: absolute;
+        right: 2px !important;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--icon-dark);
+        transition: all .3s ease-in-out;
+    }
+}
+.icon__dark{
+    svg{
+        right: 28px !important;
+    }
+}
+.dark__theme{
+    left: 25px !important;
+}

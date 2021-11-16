@@ -1,0 +1,8 @@
+@import '../../constant/variable';
+.circle{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: $fs-sm;
+    border: 2px solid $brown;
+}

@@ -1,0 +1,17 @@
+@import '../../constant/variable';
+.input{
+    input{
+        width: 100%;
+        background: transparent !important;
+        color: var(--black);
+        &::placeholder{
+            font-size: $fs-sm;
+        }
+    }
+    &:not(:last-child){
+        padding-bottom: 20px;
+    }
+}
+.error{
+    padding-top: 0;
+}

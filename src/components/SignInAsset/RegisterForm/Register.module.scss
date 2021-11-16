@@ -1,0 +1,30 @@
+@import '../../constant/variable';
+.dark{
+    margin-top: $md-pd;
+}
+.disabled {
+    pointer-events: none;
+    background: var(--disabled) !important;
+}
+
+body[data-theme="dark"]{
+    .disabled{
+        border: 1px solid var(--black);
+    }
+}
+.close{
+    width: 30px;
+    height: 30px;
+    background: var(--black);
+    svg{
+        color: var(--white);
+    }
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.container{
+    padding: 40px;
+}

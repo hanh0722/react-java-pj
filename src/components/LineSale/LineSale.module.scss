@@ -1,0 +1,53 @@
+@import '../constant/variable';
+.product{
+    .image{
+        width: 100px;
+        height: auto;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    .line__content{
+        width: calc(100% - 120px);
+        text-align: justify;
+        a{
+            padding-top: 0;
+            display: block;
+        }
+    }
+    font-size: $fs-md;
+    line-height: 30px;
+}
+.items{
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: $md-mg;
+}
+.circle{
+    position: $ab;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@media screen and (max-width: 1200px){
+    .product{
+        .line__content{
+            width: calc(100% - 150px);
+        }
+    }
+}
+@media screen and (max-width: 950px){
+    .product{
+        .line__content{
+            a, p{
+                font-size: $fs-sm;
+            }
+            width: calc(100% - 120px);
+        }
+    }
+}
+@media screen and (max-width: 768px){
+
+}

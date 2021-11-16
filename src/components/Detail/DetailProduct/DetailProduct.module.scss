@@ -1,0 +1,25 @@
+@import '../../constant/variable';
+.line{
+    margin-bottom: 8px;
+}
+.out-product{
+    color: red !important;
+}
+.sale{
+    padding-bottom: $md-pd;
+    span{
+        color: var(--orange);
+    }
+}
+.sale-value{
+    font-size: 14px;
+    padding-right: 5px;
+    text-decoration: line-through;
+    color: var(--gray);
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        padding-top: $lg-pd;
+    }
+}

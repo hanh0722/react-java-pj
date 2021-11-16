@@ -1,0 +1,65 @@
+@import '../../../constant/variable';
+.container{
+    background: var(--background-green);
+    grid-column: span 2;
+}
+.content{
+    h4{
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 35px;
+    }
+    .image{
+        position: relative;
+        max-width: 200px;
+        img{
+            width: 50px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+    }
+    .text{
+        line-height: 40px;
+        padding-right: 30px;
+    }
+    p{
+        padding: $sm-pd 0;
+    }
+    button{
+        background: var(--button-green) !important;
+        color: $white;
+    }
+}
+.image-skeleton{
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 20px;
+}
+.skeleton{
+    height: 5px !important;
+    margin-bottom: 10px !important;
+}
+
+@media screen and (max-width: 991px) {
+    .content{
+        .text{
+            padding-right: 0;
+        }
+        h4{
+            font-size: 16px;
+        }
+        p{
+            font-size: 14px;
+            padding: 10px 0;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        grid-column: auto;
+    }
+}

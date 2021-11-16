@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+}
+
+@media screen and (max-width: 968px) {
+    .container{
+        display: block !important;
+    }
+}

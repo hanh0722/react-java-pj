@@ -1,0 +1,42 @@
+@import '../../../constant/variable';
+@import '../../../../theme/mixin';
+.container{
+    line-height: 40px;
+    font-size: $fs-md;
+    .title{
+        p{
+            @include title-dashboard();
+        }
+    }
+    .type{
+        font-size: 22px;
+        font-weight: bold;
+        padding-top: $lg-mg;
+    }
+    button{
+        font-size: 12px !important;
+        color: var(--black) !important;
+        &:last-child{
+            margin-left: 10px;
+            border-color: var(--button-green);
+        }
+        &:first-child{
+            border-color: var(--border-color);
+        }
+        transition: all .15s ease-in-out;
+        &:hover{
+            &:first-child{
+                background: $brown;
+                color: $white !important;
+                border-color: $brown !important;
+                box-shadow: var(--shadow);
+            }
+            &:last-child{
+                background: var(--button-green);
+                color: $white !important;
+                box-shadow: var(--button-green-shadow);
+            }
+        }
+        font-weight: 700;
+    }
+}

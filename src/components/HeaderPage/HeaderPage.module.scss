@@ -1,0 +1,28 @@
+.skeleton{
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.container{
+    div{
+        &:first-child{
+            max-width: 400px;
+            height: 10px;
+            border-radius: 10px;
+        }
+    }
+    padding-bottom: 30px;
+}
+
+@media screen and (max-width: 576px) {
+    .container{
+        div{
+            &:first-child{
+                max-width: 300px;
+            }
+            &:last-child{
+                max-width: 250px;
+            }
+        }
+    }
+}

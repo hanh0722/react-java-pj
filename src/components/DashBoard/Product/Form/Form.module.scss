@@ -1,0 +1,10 @@
+@import '../../../constant/variable';
+.container{
+    grid-column: span 2;
+    max-width: 100%;
+    label{
+        font-size: 14px;
+        padding-bottom: $sm-pd !important;
+    }
+    margin: 0 !important;
+}

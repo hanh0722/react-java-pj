@@ -1,0 +1,31 @@
+@import '../constant/variable';
+.icon{
+    display: none;
+}
+@media screen and (max-width: 991px) {
+    .icon{
+        display: flex;
+        align-items: center;
+        color: var(--black);
+        padding: 15px 20px 8px 20px;
+        svg{
+            margin-right: 10px;
+            color: var(--black) !important;
+            font-size: $fs-md;
+        }
+    }
+    .layout{
+        position: $ab;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        transition: all .5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform: translateX(100%);
+        background: var(--white);
+        z-index: 5;
+    }
+    .back{
+        transform: translateX(0%);
+    }
+}

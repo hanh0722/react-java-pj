@@ -1,0 +1,25 @@
+@import '../../../../constant/variable';
+.container{
+    position: relative;
+    border-radius: 50%;
+}
+.loading{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($color: $black, $alpha: .35);
+    border-radius: 50%;
+    transition: all .5s ease-in-out;
+    z-index: 1;
+}
+.percent{
+    color: $white !important;
+    font-size: 14px;
+    z-index: 5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

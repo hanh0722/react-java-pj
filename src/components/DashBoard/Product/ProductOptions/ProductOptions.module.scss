@@ -1,0 +1,45 @@
+@import '../../../constant/variable';
+.title{
+    font-size: $fs-sm;
+    padding-left: 10px;
+}
+.input{
+    padding-top: $lg-pd;
+    input{
+        background: var(--white) !important;
+        width: 100%;
+        padding: 20px;
+        color: var(--black);
+    }
+}
+.container{
+    label{
+        font-size: 14px;
+        padding-bottom: $lg-pd;
+    }
+}
+.container-input{
+    position: relative;
+    svg{
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+    }
+}
+.sale{
+    label{
+        padding-top: $lg-pd;
+        padding-bottom: 0;
+    }
+}
+.button{
+    width: 100%;
+    margin-top: $lg-mg !important;
+    background: var(--btn-hover) !important;
+    color: $white !important;
+}
+.disabled{
+    background: #ddd !important;
+    pointer-events: none !important;
+}

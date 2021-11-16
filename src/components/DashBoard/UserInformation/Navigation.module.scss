@@ -1,0 +1,51 @@
+@import '../../constant/variable';
+.navigation{
+    height: 100px;
+}
+.nav{
+    list-style: none;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    padding-left: 0;
+    li{
+        padding-bottom: 10px;
+        margin-right: 40px;
+        font-size: 14px;
+        svg{
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        cursor: pointer;
+        transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        position: relative;
+        &::before{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            left: 0;
+            transition: all 1s ease-in-out;
+        }
+        &:hover{
+            color: var(--brown);
+        }
+    }
+    .active{
+        &::before{
+            width: 100%;
+            background-color: var(--brown);
+        }
+    }
+    a{
+        text-decoration: none;
+        color: var(--black) !important;
+    }
+}
+.line{
+    height: 2px;
+    background: var(--button-green);
+    position: absolute;
+    bottom: 0;
+    transition: all .3s ease-in-out;
+}

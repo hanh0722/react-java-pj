@@ -1,0 +1,25 @@
+@import '../../../constant/variable';
+.line{
+    padding-bottom: 20px;
+    font-size: $fs-sm;
+}
+.button{
+    background: var(--button-green) !important;
+    color: $white !important;
+}
+.btn{
+    padding: 10px 20px !important;
+    transition: all .35s ease-in-out;
+    width: 48%;
+}
+.btn-preview{
+    background: $white !important;
+    border: 1px solid $brown !important;
+}
+.disabled{
+    background: #ddd !important;
+    pointer-events: none !important;
+}
+.container{
+    max-width: 100%;
+}

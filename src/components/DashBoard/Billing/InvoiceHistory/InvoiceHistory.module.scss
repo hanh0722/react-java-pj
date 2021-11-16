@@ -1,0 +1,10 @@
+@import '../../../../theme/mixin';
+@import '../../../constant/variable';
+.container{
+    h5{
+        @include title-dashboard();
+        padding-bottom: 10px;
+        font-size: $fs-md;
+    }
+    font-size: $fs-sm;
+}

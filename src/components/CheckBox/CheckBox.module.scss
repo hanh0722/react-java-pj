@@ -1,0 +1,18 @@
+@import '../constant/variable';
+.checkbox{
+    width: 20px;
+    height: 20px;
+    svg{
+        font-size: 10px;
+    }
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .35s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.is--checked{
+    svg{
+        color: $white;
+    }
+    background: $brown;
+}

@@ -1,0 +1,22 @@
+@import '../../constant/variable';
+.container{
+    padding-top: $lg-pd;
+    line-height: 35px;
+    font-size: $fs-md;
+    span{
+        font-weight: 700;
+        font-size: $fs-lg;
+    }
+    text-align: center;
+    .note{
+        font-size: $fs-sm;
+    }
+}
+@media screen and (max-width: 576px) {
+    .container{
+        font-size: $fs-sm;
+        span{
+            font-size: $fs-md;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+.form{
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-shadow: none;
+    margin: 0;
+    .address{
+        input{
+            border-color: #ddd !important;
+        }
+    }
+}
+.field{
+    margin-top: 20px;
+}
+.btn-save{
+    background: var(--button-green) !important;
+    color: white !important;
+
+}
+.skeleton-container{
+    div{
+        margin-bottom: 8px;
+    }
+}
+.disabled{
+    background: var(--input-bg) !important;
+    pointer-events: none !important;
+}

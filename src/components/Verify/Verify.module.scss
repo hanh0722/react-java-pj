@@ -1,0 +1,24 @@
+@import '../constant/variable';
+.form--verify{
+    max-width: 450px;
+    margin: 0 auto;
+}
+.title{
+    padding-bottom: $lg-pd;
+    font-size: 25px;
+}
+.submit{
+    margin-top: $lg-mg !important;
+    width: 50%;
+    background: var(--btn-hover) !important;
+    color: $white !important;
+}
+.loading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba($color: #000000, $alpha: .5);
+}

@@ -1,0 +1,19 @@
+@import '../constant/variable';
+.error{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: $md-pd;
+    background: $white;
+    border-radius: 8px;
+    line-height: 35px;
+    width: 500px;
+    text-align: center;
+}
+
+@media screen and (max-width: 576px) {
+    .error{
+        width: 90%;
+    }
+}

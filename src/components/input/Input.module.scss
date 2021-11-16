@@ -1,0 +1,40 @@
+@import '../constant/variable';
+.search{
+    position: $rl;
+    svg{
+        position: $ab;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: $fs-md;
+    }
+    input{
+        padding: $pd-input;
+        border: $border-input;
+        width: 100%;
+        border-radius: 5px;
+        padding-right: 60px;
+        transition: all .15s;
+        &:hover{
+            border-color: $brown;
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+    .close{
+        right: 40px;
+        animation: fade cubic-bezier(0.075, 0.82, 0.165, 1) .5s forwards;
+    }
+}
+
+@keyframes fade {
+    0%{
+        opacity: 0;
+        transform: scale(0) translateY(0);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1) translateY(-50%);
+    }
+}

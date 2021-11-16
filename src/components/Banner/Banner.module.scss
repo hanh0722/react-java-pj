@@ -1,0 +1,15 @@
+@import '../constant/variable';
+.container{
+    padding: $lg-pd;
+}
+
+@media screen and (max-width: 1200px) {
+    .container{
+        padding: $md-pd;
+    }
+}
+@media screen and (max-width: 768px) {
+    .container{
+        padding: 0;
+    }
+}

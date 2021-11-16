@@ -1,0 +1,116 @@
+@import '../../constant/variable';
+.content{
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 50px;
+    p{
+        padding: 10px 0;
+        margin: 0 30px !important;
+        text-transform: capitalize;
+        cursor: pointer;
+        position: $rl;
+        &::before{
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            height: 2px;
+            width: 0;
+            transition: all .5s;
+            background: var(--black);
+        }
+    }
+    .active{
+        &::before{
+            width: 100%;
+        }
+    }
+}
+.introduce{
+    margin-bottom: 50px;
+    img{
+        width: 100%;
+        height: auto;
+    }
+    .content__product{
+        padding-left: 2rem;
+        line-height: 30px;
+        h4{
+            font-size: 25px;
+            text-transform: capitalize;
+            padding-bottom: 20px;
+        }
+        p{
+            font-size: 14px;
+        }
+        .more__detail{
+            padding-top: 20px;
+            font-size: 14px;
+        }
+        ul{
+            margin-bottom: 0;
+        }
+    }
+}
+.loading-image{
+    width: 100%;
+    height: 100%;
+}
+.ld-text{
+    margin-bottom: 12px;
+}
+.container--text{
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.infor-product{
+    ol, ul{
+        padding-top: 20px;
+    }
+    p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    img{
+        max-width: 300px;
+        max-height: 300px;
+    }
+}
+@media screen and (max-width: 991px) {
+    .container--text{
+        height: 250px;
+    }
+    .ld-text{
+        margin-bottom: 8px;
+    }
+}
+@media screen and (max-width: 768px){
+    .introduce{
+        .content__product{
+            padding-left: calc(var(--bs-gutter-x) * .5);
+            margin: 50px 0;
+        }
+        .image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .content{
+        flex-direction: column;
+        p{
+            display: inline-block;
+        }
+    }
+    .loading-image{
+        height: 400px;
+    }
+    .infor-product{
+        img{
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}

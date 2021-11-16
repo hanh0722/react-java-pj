@@ -1,0 +1,46 @@
+@import '../../../constant/variable';
+.container{
+    background: var(--gray-secondary);
+    padding: $lg-pd;
+    margin-top: $md-mg;
+    line-height: 40px;
+    color: $black;
+    p{
+        font-size: $fs-sm;
+    }
+    .address{
+        line-height: 30px;
+        padding-top: $lg-pd;
+    }
+    h5{
+        font-size: $fs-md;
+        font-weight: bold;
+    }
+    .delete, .edit{
+        font-size: $fs-sm;
+        svg{
+            margin-right: 5px;
+        }
+        padding: 3px 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all .15s ease-in-out;
+    }
+    .ripple{
+        border-radius: 4px;
+        overflow: hidden;
+        margin-right: 15px;
+    }
+    .delete{
+        &:hover{
+            background: var(--light-red-primary);
+        }
+        color: var(--red-primary);
+    }
+    .edit{
+        &:hover{
+            background: var(--light-green-primary);
+        }
+        color: var(--active);
+    }
+}

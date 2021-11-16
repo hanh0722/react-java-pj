@@ -1,0 +1,57 @@
+
+@import '../constant/variable';
+.list{
+    ul{
+        list-style: none;
+        padding: 10px;
+        margin: 0;
+        li{
+            padding-bottom: 15px;
+            &:last-child{
+                padding-bottom: 0;
+            }
+            cursor: pointer;
+        }
+        box-shadow: var(--shadow);
+        border-radius: 6px;
+        height: 200px;
+        overflow: scroll;
+        margin-top: $md-mg;
+    }
+}
+.title{
+    font-size: $fs-sm;
+    cursor: default;
+}
+@mixin image {
+    width: 35px;
+    height: auto;
+    border-radius: 2px;
+}
+.select{
+    font-size: 12px;
+    svg{
+        font-size: 10px;
+    }
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    border-radius: 7px;
+    margin-top: 10px;
+    cursor: pointer;
+    img{
+        @include image();
+    }
+    .name-country{
+        @include show-n-line(1);
+    }
+}
+.country{
+    img{
+        @include image();
+    }
+    span{
+        font-size: 12px;
+        padding-left: 10px;
+        @include show-n-line(1);
+    }
+}

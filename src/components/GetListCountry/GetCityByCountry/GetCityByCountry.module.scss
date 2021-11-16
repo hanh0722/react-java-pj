@@ -1,0 +1,50 @@
+@import "../../constant/variable";
+.list {
+  .title {
+    font-size: 14px;
+    cursor: default;
+  }
+  .box {
+    margin-top: 10px;
+    font-size: 14px;
+    span {
+      margin-left: 10px;
+      font-size: 12px;
+    }
+    transition: all .35s ease-in-out;
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    cursor: pointer;
+    &:hover{
+      box-shadow: var(--shadow);
+    }
+  }
+  ul {
+    padding: 10px;
+    margin-bottom: 0;
+    margin-top: $md-mg;
+    height: 200px;
+    overflow: scroll;
+    li{
+        padding-top: 10px;
+        font-size: 12px;
+        &:first-child{
+          padding-top: 0;
+        }
+        cursor: pointer;
+    }
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .list{
+    ul{
+      li{
+        font-size: 10px;
+      }
+    }
+  }
+}

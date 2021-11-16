@@ -1,0 +1,41 @@
+@import '../../constant/variable';
+.container{
+    margin-top: 100px;
+    h4{
+        font-size: 20px;
+        padding-bottom: 30px;
+    }
+}
+.swiper{
+    padding-bottom: 50px;
+    position: static;
+}
+.navigation-swiper{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+    svg{
+        transition: all .25s ease-in-out;
+    }
+    &:hover{
+        svg{
+            color: $white !important;
+        }
+        background: $brown;
+    }
+}
+.right{
+    right: 0;
+}
+.left{
+    right: 40px;
+}

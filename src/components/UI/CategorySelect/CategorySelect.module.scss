@@ -1,0 +1,20 @@
+@import '../../constant/variable';
+.list{
+    list-style: none;
+    padding: $sm-pd;
+    margin: 0;
+    box-shadow: var(--shadow);
+    margin-top: $md-mg;
+    border-radius: 10px;
+    li{
+        padding-bottom: 15px;
+        &:last-child{
+            padding-bottom: 0;
+        }
+        cursor: pointer;
+        font-size: $fs-sm;
+    }
+    height: 150px;
+    overflow: scroll;
+}
+

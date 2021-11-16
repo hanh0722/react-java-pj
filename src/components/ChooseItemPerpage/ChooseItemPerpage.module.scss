@@ -1,0 +1,29 @@
+@import '../constant/variable';
+.container{
+    font-size: $fs-sm;
+    span{
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: $sm-mg;
+        border-radius: 2px;
+        cursor: pointer;
+        background: #f2f2f2;
+        transition: all .15s ease-in-out;
+        &:hover{
+            background: $brown;
+            svg{
+                fill: $white;
+            }
+        }
+    }
+    padding-bottom: 30px;
+    .active{
+        background: $brown !important;
+        svg{
+            fill: $white !important;
+        }
+    }
+}

@@ -1,0 +1,119 @@
+@import '../../constant/variable';
+.line{
+    p{
+        &:first-child{
+            span{
+                margin: 0 15px;
+            }
+            svg{
+                transition: all .35s;
+                &:first-child{
+                    font-size: $fs-sm;
+                }
+                &:last-child{
+                    transform: rotate(45deg);
+                    color: $brown;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    padding-bottom: $lg-pd;
+    .open--box{
+        p{
+            svg{
+                &:last-child{
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+    }
+}
+.cart{
+    height: 30vh;
+    overflow: scroll;
+}
+
+.btn{
+    background: var(--btn-hover) !important;
+    color: $white !important;
+    padding: 5px 10px !important;
+}
+.discount{
+    padding-bottom:  0 !important;
+}
+.voucher{
+    position: relative;
+    width: 100%;
+    input{
+        width: 100%;
+        padding: 6px 30px 6px 16px !important;
+        font-size: $fs-sm;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: transparent !important;
+        color: var(--black);
+        font-size: $fs-sm;
+        &:focus{
+            outline: none;
+        }
+        &::placeholder{
+            font-size: $fs-sm;
+        }
+    }
+    svg{
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: $fs-sm;
+    }
+}
+.error{
+    padding-top: 15px;
+    font-size: 14px;
+}
+.accept--btn{
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: $fs-sm;
+}
+.image-loading{
+    width: 100px;
+    height: 100px;
+}
+.loading-skeleton{
+    width: calc(100% - 100px);
+    padding: 0 $md-mg;
+    & > div{
+        margin-bottom: 8px;
+    }
+}
+.loading-total{
+    & > div{
+        &:not(:last-child){
+            padding-bottom: $md-mg;
+        }
+    }
+}
+.cancel-button{
+    border-color: var(--border-color) !important;
+    margin-top: $md-mg;
+    font-size: 12px;
+    color: var(--black);
+}
+.flow{
+    height: 40vh;
+    overflow-y: scroll;
+    margin-bottom: $md-mg;
+    padding-top: 5px;
+    & > div{
+        &:last-child{
+            border-bottom: none;
+        }
+    }
+}

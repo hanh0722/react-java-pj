@@ -1,0 +1,47 @@
+.row{
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    p{
+        &:first-child{
+            width: 25px;
+            height: 25px;
+        }
+        &:last-child{
+            width: calc(100% - 40px);
+            font-size: 14px;
+            span{
+                font-weight: bold;
+                margin-right: 10px;
+            }
+        }
+    }
+    svg{
+        font-size: 14px;
+        width: 100%;
+        height: auto;
+    }
+}
+.card{
+    img{
+        width: 60%;
+        height: auto;
+    }
+    padding: 15px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: rgba($color: #ddd, $alpha: .5);
+    p{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 991px){
+    .card{
+        img{
+            width: 80%;
+        }
+    }
+}

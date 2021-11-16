@@ -1,0 +1,26 @@
+@import '../../constant/variable';
+.banner{
+    img{
+        width: 100%;
+        height: auto;
+        transition: all .5s;
+        &:hover{
+            transform: scale(1.1) translateY(-5%);
+        }
+    }
+    overflow: hidden;
+}
+.container{
+    padding: $lg-pd;
+}
+
+@media screen and (max-width: 1200px) {
+    .container{
+        padding: $md-pd;
+    }
+}
+@media screen and (max-width: 768px) {
+    .container{
+        padding: 0;
+    }
+}

@@ -1,0 +1,28 @@
+@import '../constant/variable';
+.container{
+    .image{
+        max-width: 500px;
+        height: auto;
+        img{
+            width: 100%;
+            height: auto;
+        }
+        margin: 0 auto;
+    }
+}
+.button{
+    max-width: 350px;
+    margin: 0 auto;
+    padding-top: $lg-pd;
+    button {
+        background: var(--btn-hover);
+        &:hover{
+            background: var(--btn-hover);
+        }
+        color: $white;
+        width: 100%;
+    }
+    a{
+        text-decoration: none;
+    }
+}

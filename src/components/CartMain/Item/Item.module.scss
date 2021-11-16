@@ -1,0 +1,71 @@
+@import '../../constant/variable';
+.item{
+    .image__product{
+        width: 120px;
+        height: 120px;
+    }
+    text-transform: capitalize;
+    .product__content{
+        width: calc(100% - 150px);
+    }
+    img{
+        width: 100%;
+        height: auto;
+    }
+    a{
+        color: var(--black);
+        text-decoration: none;
+    }
+    p{
+        font-size: $fs-sm;
+    }
+    padding: $md-pd 0;
+    line-height: 40px;
+    &:not(:last-child){
+        border-bottom: 1px solid var(--border-color);
+    }
+    svg{
+        font-size: $fs-lg;
+        cursor: pointer;
+    }
+}
+.quantity__btn{
+    div{
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:first-child, &:last-child{
+            background: var(--btn-quantity);
+            color: var(--white);
+        }
+        cursor: pointer;
+    }
+    input{
+        text-align: center;
+        width: 40px;
+        height: 28px;
+        outline: none;
+        background: var(--quantity);
+        border: none;
+        padding: 0px 5px;
+        font-size: $fs-sm;
+        &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
+.trash{
+    width: 30px;
+    height: 30px;
+}
+@media screen and (max-width: 768px){
+    .item{
+        line-height: 35px;
+    }
+    .product__content{
+        width: calc(100% - 140px) !important;
+    }
+}

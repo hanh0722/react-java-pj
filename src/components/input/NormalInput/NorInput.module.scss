@@ -1,0 +1,22 @@
+@import '../../constant/variable';
+.input{
+    width: 100%;
+    input{
+        padding: 6px 16px;
+        transition: all .3s ease;
+        background: var(--input-border);
+        &::placeholder{
+            color: var(--black);
+            font-size: 14px;
+        }
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        &:hover{
+            background: var(--input-border);
+            box-shadow: $sm-shadow;
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+}

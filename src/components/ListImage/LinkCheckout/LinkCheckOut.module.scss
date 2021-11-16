@@ -1,0 +1,117 @@
+@import '../../constant/variable';
+.container{
+    width: 100%;
+    background: var(--white);
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+    padding: 10px;
+    box-shadow: var(--shadow);
+}
+.link{
+    max-width: 1140px;
+    margin: 0 auto;
+    .image{
+        img{
+            width: 100px;
+            height: 100px;
+        }
+        width: 20%;
+    }
+    line-height: 40px;
+    p{
+        font-size: 12px;
+        &:first-child{
+            font-weight: bold;
+            font-size: 12px;
+        }
+    }
+}
+.add{
+    button{
+        border-width: 2px;
+        &:first-child{
+            margin: 0 20px;
+            border-color: var(--btn-hover);
+            color: var(--black);
+        }
+        &:last-child{
+            background: var(--btn-hover);
+            color: $white;
+        }
+        padding: 10px 22px;
+    }
+}
+.quantity{
+    div{
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    input{
+        width: 50px;
+        height: 30px;
+        border: none;
+        outline: none;
+    }
+}
+.loading-image{
+    width: 100px;
+    height: 100px;
+}
+.container-loading{
+    width: 100px;
+    margin-left: 10px;
+}
+@media screen and (max-width: 768px) {
+    .add{
+        button{
+            padding: 6px 10px;
+            &:first-child{
+                margin: 0px 10px;
+            }
+        }
+    }
+    .quantity{
+        input{
+            width: 30px;
+            font-size: $fs-sm;
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .add{
+        button{
+            &:first-child{
+                display: none;
+            }
+            &:last-child{
+                margin-left: 15px;
+            }
+        }
+    }
+    .quantity{
+        div{
+            width: 25px;
+            height: 25px;
+        }
+    }
+    .image{
+        img{
+            width: 60px !important;
+            height: 60px !important;
+        }
+        p{
+            font-size: $fs-sm !important;
+        }
+        line-height: 30px;
+        width: auto !important;
+    }
+    .loading-image{
+        width: 60px;
+        height: 60px;
+    }
+}

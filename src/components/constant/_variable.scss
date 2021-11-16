@@ -1,0 +1,40 @@
+$brown: #cd783e;
+$black: #000000;
+$green: #00947C;
+$white: #fff;
+$sm-opacity: .5;
+$md-opacity: .75;
+$lg-opacity: .85;
+$sm-shadow: 0px 2px 8px rgba($black, .15);
+$md-shadow: 0px 2px 8px rgba($black, .25);
+$sm-pd: 15px;
+$md-pd: 20px;
+$lg-pd: 25px;
+$sm-mg: 15px;
+$md-mg: 20px;
+$lg-mg: 25px;
+$rl: relative;
+$ab: absolute;
+$fs-sm: 14px;
+$fs-md: 16px;
+$fs-lg: 18px;
+$tl-20: translateY(20%);
+$tl-50: translateY(50%);
+$opacity-0: opacity(0);
+$opacity-1: opacity(1);
+$flex: flex;
+$block: block;
+$pd-input: 10px 16px;
+$border-input: 1px solid #ddd;
+$height-full: 100vh;
+$upper: uppercase;
+$lower: lowercase;
+$capitalize: capitalize;
+
+@mixin show-n-line($value) {
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: $value; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}

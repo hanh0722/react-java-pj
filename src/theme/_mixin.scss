@@ -1,0 +1,11 @@
+@mixin show-n-line($number) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $number; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+@mixin title-dashboard {
+  text-transform: uppercase;
+  color: var(--gray-primary);
+}

@@ -1,0 +1,119 @@
+@import '../constant/variable';
+
+.text{
+    padding: $lg-pd;
+    line-height: 40px;
+    z-index: 2;
+    .thumb{
+        padding: 5px;
+        border-radius: 5px;
+        background: $brown;
+        color: $white;
+    }
+    h2{
+        padding: $sm-pd 0;
+        font-size: 50px;
+        text-transform: $capitalize;
+    }
+    h4{
+        font-size: $fs-md;
+        color: $brown;
+        font-weight: bold;
+    }
+    a{
+        text-decoration: none;
+        color: var(--black);
+        font-weight: bold;
+        padding: $sm-pd 0px;
+        position: relative;
+        transition: all .5s;
+        margin-top: $sm-mg;
+        display: block;
+        &::before, &::after{
+            position: absolute;
+            bottom: 0;
+            content: '';
+            width: 50%;
+            height: 3px;
+            background: $brown;
+            left: 0;
+            transition: all .5s;
+        }
+        .hover{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            background: var(--btn-hover);
+            transition: all .5s;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        &::after{
+            right: 0;
+            background: $brown;
+            width: 0%;
+            left: auto;
+        }
+        &:hover{
+            &::before{
+                width: 0%;
+            }
+            &::after{
+                width: 100%;
+            }
+            .hover{
+                width: 100%;
+                opacity: 1;
+            }
+            color: $white;
+            padding: $sm-pd $sm-pd;
+        }
+    }
+}
+.ripple{
+    display: inline-block;
+}
+@media screen and (max-width: 1200px) {
+    .text{
+        padding: $md-pd;
+        h2{
+            font-size: 33px;
+        }
+        p{
+            &:first-child{
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .text{
+        position: absolute;
+        top: 50%;
+        left: calc(50% + 20px);
+        transform: translate(-50%, -50%) !important;
+        color: $white;
+        a{
+            color: $white;
+            &::before, &::after{
+                background: $white !important;
+            }
+        }
+    }
+}
+@media screen and (max-width: 576px){
+    .text{
+        h2{
+            font-size: 25px;
+        }
+        left: calc(50% + 10px);
+        p{
+            font-size: 14px !important;
+        }
+    }
+}
