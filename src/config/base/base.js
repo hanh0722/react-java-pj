@@ -1,0 +1,7 @@
+const SERVER_URL_JAVA = process.env.REACT_APP_SERVER_JAVA_URL;
+const SERVER_URL_NODEJS = process.env.REACT_APP_SERVER_NODEJS_URL;
+
+export {
+    SERVER_URL_JAVA,
+    SERVER_URL_NODEJS
+}

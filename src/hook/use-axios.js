@@ -176,6 +176,11 @@ const useAxios = () => {
     },
     [dispatchEvent]
   );
+  const resetAllHandler = () => {
+    dispatch({
+      type: type.RESET
+    })
+  }
   return {
     isLoading: state.isLoading,
     percentLoading: state.percentLoading,
@@ -184,7 +189,8 @@ const useAxios = () => {
     fetchDataFromServer: fetchDataFromServer,
     percentDownload: state.percentDownload,
     status: state.status,
-    stopLoading: stopLoading
+    stopLoading: stopLoading,
+    resetAllHandler
   };
 };
 

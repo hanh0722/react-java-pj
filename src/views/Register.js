@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import Header from "../components/SignInAsset/RegisterForm/Header/Header";
 import RegisterForm from "../components/SignInAsset/RegisterForm/RegisterForm";
-import useFetch from "../hook/use-fetch";
 import { useHistory } from "react-router-dom";
-import { registerUrl } from "../config/url";
+import { registerApi } from "../config/authorization/authorization";
 import Overlay from "../components/overlay/Overlay";
 import ReactDOM from "react-dom";
 import FixLayout from "../components/FixLayout/FixLayout";
@@ -13,34 +12,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import styles from "../components/SignInAsset/RegisterForm/Register.module.scss";
 import { PAGE_VERIFY_FIRST } from "../components/link/link";
+import useAxios from "../hook/use-axios";
 const Register = () => {
   const history = useHistory();
   const {
     isLoading,
-    data,
     error,
+    data,
+    fetchDataFromServer,
     status,
     resetAllHandler,
-    getDataFromServerHandler: sendDataToServer,
-  } = useFetch();
+  } = useAxios();
   const registerHandler = (userData) => {
-    sendDataToServer({
-      url: registerUrl,
-      options: {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      },
-      message: "User is already existed!",
-    });
+    const { name, email, password, phone } = userData;
+    fetchDataFromServer({
+      url: registerApi,
+      method: 'POST',
+      data: {
+        name: name,
+        email: email,
+        password: password,
+        phone: phone
+      }
+    })
   };
   useEffect(() => {
     if (data && !isLoading && !error) {
-      history.push(`${PAGE_VERIFY_FIRST}?id=${data._id}`);
-      console.log(data);
+      history.push(`${PAGE_VERIFY_FIRST}?id=${data.data._id}`);
       // change to send information
     }
+
   }, [data, error, history, isLoading]);
+  console.log(error);
   return (
     <>
       <Header />
@@ -54,12 +57,12 @@ const Register = () => {
       >
         <>
           <FixLayout className={`text-center ${styles.container}`}>
-            {status === 422 && (
-              <p>User is already existed, please choose other email!</p>
-            )}
-            {status === 500 && <p>Something went wrong, please try again</p>}
-            <div onClick={resetAllHandler} className={`${styles.close} d-flex justify-content-center align-items-center`}>
-              <FontAwesomeIcon icon={faTimes}/>
+            {error && status !== 200 && <p>{error.message || "Cannot get data from server"}</p>}
+            <div
+              onClick={resetAllHandler}
+              className={`${styles.close} d-flex justify-content-center align-items-center`}
+            >
+              <FontAwesomeIcon icon={faTimes} />
             </div>
           </FixLayout>
           {ReactDOM.createPortal(
