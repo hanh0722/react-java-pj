@@ -2,25 +2,25 @@ import React, { useEffect } from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import LoginForm from "../components/SignInAsset/LoginForm/LoginForm";
 import HeaderPage from "../components/HeaderPage/HeaderPage";
-import useFetch from "../hook/use-fetch";
 import checkValidPassword from "../components/SignInAsset/CheckValidPassword/CheckValidPassword";
-import { loginUrl } from "../config/url";
 import { HOME_PAGE } from "../components/link/link";
 import { useDispatch } from "react-redux";
 import { NotifyActions } from "../components/store/NotifyAfterLogin/NotifyAfterLogin";
 import { isAuthActions } from "../components/store/IsAuth/is-auth";
+import { loginApi } from "../config/authorization/authorization";
+import useAxios from "../hook/use-axios";
 const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const route = useRouteMatch();
   const {
-    getDataFromServerHandler,
-    data: dataSignIn,
-    error,
+    fetchDataFromServer: getDataFromServerHandler,
     isLoading,
-    status,
+    error,
     resetAllHandler,
-  } = useFetch();
+    status,
+    data,
+  } = useAxios();
   const getUserFromInput = (userData) => {
     if (
       !userData.email.includes("@") ||
@@ -29,25 +29,26 @@ const SignIn = () => {
       return;
     }
     resetAllHandler();
+    const params = new URLSearchParams();
+    params.append("email", userData.email);
+    params.append("password", userData.password);
     getDataFromServerHandler({
-      url: loginUrl,
-      options: {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      },
+      url: loginApi,
+      data: params,
+      method: "POST",
     });
   };
   useEffect(() => {
     if (error || isLoading) {
       return;
     }
-    if (!isLoading && dataSignIn && !error) {
-      const { token, expiry } = dataSignIn;
+    if (!isLoading && data && !error) {
+      const { token } = data.data;
       localStorage.setItem("token/customer", token);
-      localStorage.setItem("expiry/customer", expiry);
+      localStorage.setItem(
+        "expiry/customer",
+        Date.now() + 3 * 60 * 60 * 1000
+      );
       dispatch(isAuthActions.setIsAuthenticated(token));
       dispatch(
         NotifyActions.showedNotify({
@@ -57,7 +58,7 @@ const SignIn = () => {
       );
       history.push(HOME_PAGE);
     }
-  }, [dataSignIn, error, isLoading, history, status, dispatch]);
+  }, [isLoading, error, data, dispatch, history]);
   return (
     <>
       <HeaderPage

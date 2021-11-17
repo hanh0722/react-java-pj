@@ -9,8 +9,8 @@ import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 import ReactDOM from "react-dom";
 import useInterval from "../../hook/use-interval";
-import { urlCheckVerify } from "../../config/url";
 import Ripple from "../Loading/Ripple/Ripple";
+import { checkUserIsValidate } from "../../config/authorization/authorization";
 const Verify = (props) => {
   const location = useLocation();
   const firstInputRef = useRef();
@@ -41,7 +41,7 @@ const Verify = (props) => {
   const { isLoading, error, data, getDataFromServerHandler } = useFetch();
   useEffect(() => {
     // check valid user if it's doesnt valid => redirect
-    const getUrl = urlCheckVerify(params.id, params.token);
+    const getUrl = checkUserIsValidate(params.token);
     getDataFromServerHandler({
       url: getUrl,
     });
@@ -54,7 +54,8 @@ const Verify = (props) => {
   return (
     <>
       {error && !isLoading && time === 0 && <Redirect to="/" />}
-      <Container>
+
+      <Container className={styles['container-submit']}>
         {isLoading && (
           <Loading
             className={`${styles.loading} d-flex justify-content-center align-items-center`}
@@ -95,7 +96,7 @@ const Verify = (props) => {
           error &&
           ReactDOM.createPortal(
             <Error>
-              <p>Your url is expired or not valid, please try again</p>
+              <p>Your url is not valid, please try again</p>
               <p>
                 You will be redirect after{" "}
                 <span style={{ color: "red" }}>{time}</span> seconds

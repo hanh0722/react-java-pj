@@ -11,7 +11,7 @@ import { NOT_FOUND } from "../link/link";
 import ContentUser from "./ContentUser/ContentUser";
 import { getUserById } from "../../config/user/user";
 const Success = ({ params }) => {
-  const { data, error, isLoading, getDataFromServerHandler } = useFetch();
+  const { data, error, isLoading, getDataFromServerHandler, resetAllHandler } = useFetch();
   const getUserId = useMemo(() => {
     const getParams = new URLSearchParams(params);
     return getParams.get("id");
@@ -24,7 +24,10 @@ const Success = ({ params }) => {
     getDataFromServerHandler({
       url: getUserById(getUserId)
     })
-  }, [getDataFromServerHandler, getUserId, history]);
+    return () => {
+      resetAllHandler();
+    }
+  }, [getDataFromServerHandler, getUserId, history, resetAllHandler]);
   return (
     <Container className={styles.container}>
       {isLoading && (

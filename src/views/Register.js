@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Header from "../components/SignInAsset/RegisterForm/Header/Header";
 import RegisterForm from "../components/SignInAsset/RegisterForm/RegisterForm";
-import { useHistory } from "react-router-dom";
-import { registerApi } from "../config/authorization/authorization";
+import { Redirect } from "react-router-dom";
+import { registerApi, sendMailAfterRegister } from "../config/authorization/authorization";
 import Overlay from "../components/overlay/Overlay";
 import ReactDOM from "react-dom";
 import FixLayout from "../components/FixLayout/FixLayout";
@@ -14,7 +14,6 @@ import styles from "../components/SignInAsset/RegisterForm/Register.module.scss"
 import { PAGE_VERIFY_FIRST } from "../components/link/link";
 import useAxios from "../hook/use-axios";
 const Register = () => {
-  const history = useHistory();
   const {
     isLoading,
     error,
@@ -23,33 +22,44 @@ const Register = () => {
     status,
     resetAllHandler,
   } = useAxios();
+  const {
+    isLoading: isLoadingCheck,
+    error: errorCheck,
+    data: dataCheck,
+    fetchDataFromServer: fetchingData,
+    status: statusCheck,
+  } = useAxios();
   const registerHandler = (userData) => {
     const { name, email, password, phone } = userData;
     fetchDataFromServer({
       url: registerApi,
-      method: 'POST',
+      method: "POST",
       data: {
         name: name,
         email: email,
         password: password,
-        phone: phone
-      }
-    })
+        phone: phone,
+      },
+    });
   };
   useEffect(() => {
-    if (data && !isLoading && !error) {
-      history.push(`${PAGE_VERIFY_FIRST}?id=${data.data._id}`);
-      // change to send information
+    if(!isLoading && data){
+      fetchingData({
+        method: 'POST',
+        url: sendMailAfterRegister,
+        data: {
+          email: data?.data?.email
+        }
+      })
     }
-
-  }, [data, error, history, isLoading]);
-  console.log(error);
+  }, [data, isLoading, fetchingData]);
   return (
     <>
+      {!isLoadingCheck && !isLoading && dataCheck && data && <Redirect to={`${PAGE_VERIFY_FIRST}?id=${data?.data?._id}`}/>}
       <Header />
       <RegisterForm isLoading={isLoading} onRegister={registerHandler} />
       <CSSTransition
-        in={!isLoading && error && status <= 500 && status >= 400}
+        in={(!isLoading && error && status <= 500 && status >= 400) || (!isLoadingCheck && error)}
         unmountOnExit
         mountOnEnter
         timeout={500}
@@ -57,7 +67,9 @@ const Register = () => {
       >
         <>
           <FixLayout className={`text-center ${styles.container}`}>
-            {error && status !== 200 && <p>{error.message || "Cannot get data from server"}</p>}
+            {((error && status !== 200) || (errorCheck && statusCheck !== 200)) && (
+              <p>{error.message || errorCheck.message || "Cannot get data from server"}</p>
+            )}
             <div
               onClick={resetAllHandler}
               className={`${styles.close} d-flex justify-content-center align-items-center`}

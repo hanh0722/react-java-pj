@@ -47,6 +47,7 @@ const App = () => {
     });
     window.addEventListener("scroll", getScrollHandler);
     dispatch(checkUserIsAuth());
+
   }, [dispatch, getScrollHandler]);
   useEffect(() => {
     upToTopHandler();
