@@ -6,11 +6,13 @@ const initialState = {
   // if we have token => must be true => persist token
   expired: false,
   token: localStorage.getItem('token/customer') || null,
+  emailUser: localStorage.getItem('tracking/user') || null
 };
 
 const removeStorageHandler = () => {
   localStorage.removeItem("token/customer");
   localStorage.removeItem("expiry/customer");
+  localStorage.removeItem('tracking/user');
 };
 const isAuthSlice = createSlice({
   name: "is-auth",
@@ -37,7 +39,8 @@ export const checkUserIsAuth = () => {
   return (dispatch) => {
     const token = localStorage.getItem("token/customer");
     const expiryTime = localStorage.getItem("expiry/customer");
-    if (!token || !expiryTime) {
+    const trackingEmail = localStorage.getItem('tracking/user');
+    if (!token || !expiryTime || !trackingEmail) {
       dispatch(isAuthActions.setIsLoggedOut());
       return;
     }

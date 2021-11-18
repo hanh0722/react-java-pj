@@ -43,12 +43,13 @@ const SignIn = () => {
       return;
     }
     if (!isLoading && data && !error) {
-      const { token } = data.data;
+      const { token, email } = data.data;
       localStorage.setItem("token/customer", token);
       localStorage.setItem(
         "expiry/customer",
         Date.now() + 3 * 60 * 60 * 1000
       );
+      localStorage.setItem('tracking/user', email);
       dispatch(isAuthActions.setIsAuthenticated(token));
       dispatch(
         NotifyActions.showedNotify({

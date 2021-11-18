@@ -4,8 +4,8 @@ import { useRouteMatch, Redirect } from "react-router-dom";
 import ForgetPassword from "../components/SignInAsset/ForgetPassword/ForgetPassword";
 import HeaderPage from "../components/HeaderPage/HeaderPage";
 import useFetch from "../hook/use-fetch";
-import { resetPasswordUrl } from "../config/url";
-import {PAGE_VERIFY_FIRST} from '../components/link/link';
+import { PAGE_VERIFY_FIRST } from "../components/link/link";
+import { resetPasswordByEmail } from "../config/authorization/authorization";
 const Reset = () => {
   const route = useRouteMatch();
   const { isLoading, error, data, getDataFromServerHandler, resetAllHandler } =
@@ -16,21 +16,23 @@ const Reset = () => {
     }
     resetAllHandler();
     getDataFromServerHandler({
-      url: resetPasswordUrl,
+      url: resetPasswordByEmail,
       options: {
-        method: 'POST',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: emailUser
-        })
-      }
-    })
+          email: emailUser,
+        }),
+      },
+    });
   };
   return (
     <>
-      {!isLoading && !error && data && <Redirect to={`${PAGE_VERIFY_FIRST}?id=${data._id}`}/>}
+      {!isLoading && !error && data && (
+        <Redirect to={`${PAGE_VERIFY_FIRST}?id=${data._id}`} />
+      )}
       <HeaderPage
         title="Reset Password"
         paths={[
@@ -48,7 +50,12 @@ const Reset = () => {
           },
         ]}
       />
-      <ForgetPassword isLoadingFromServer={isLoading} resetPasswordHandler={resetPasswordHandler} />
+      <ForgetPassword
+        isLoadingFromServer={isLoading}
+        resetPasswordHandler={resetPasswordHandler}
+        errorChecking={error}
+        resetAllHandler={resetAllHandler}
+      />
     </>
   );
 };

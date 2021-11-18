@@ -25,6 +25,7 @@ import FeatureMobile from "./FeatureMobile/FeatureMobile";
 import useMedia from "../../hook/use-media";
 import { isAuthActions } from "../store/IsAuth/is-auth";
 import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
+import { userDataActions } from "../store/GetUserData/get-user-data";
 import { DASHBOARD_MATERIAL, DASHBOARD, HOME_PAGE } from "../link/link";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
@@ -56,6 +57,7 @@ const Navigation = ({ isDowned }) => {
   };
   const signOutHandler = () => {
     dispatch(isAuthActions.setIsLoggedOut());
+    dispatch(userDataActions.removeUserPersist());
     dispatch(
       NotifyActions.showedNotify({
         message: "Sign out successfully",

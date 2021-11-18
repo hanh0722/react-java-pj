@@ -16,10 +16,12 @@ import LayoutTop from "./components/layout/LayoutTop/LayoutTop";
 import MessageSideBar from "./components/MessageSideBar/MessageSideBar";
 import ProgressLoading from "./components/ProgressLoading/ProgressLoading";
 import { checkUserIsAuth } from "./components/store/IsAuth/is-auth";
+import { getUserDataHandler } from "./components/store/GetUserData/get-user-data";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();
   const state = useSelector((state) => state.hamburger.isShowed);
+  const isAuth = useSelector((state) => state.isAuth);
   const dispatch = useDispatch();
   const getScrollHandler = useCallback(() => {
     let newValue;
@@ -47,11 +49,17 @@ const App = () => {
     });
     window.addEventListener("scroll", getScrollHandler);
     dispatch(checkUserIsAuth());
-
   }, [dispatch, getScrollHandler]);
   useEffect(() => {
     upToTopHandler();
   }, [location.pathname]);
+  useEffect(() => {
+    const { token, isLoggedIn, emailUser } = isAuth;
+    if (!token || !isLoggedIn || !emailUser) {
+      return;
+    }
+    dispatch(getUserDataHandler(emailUser, token));
+  }, [isAuth, dispatch]);
   const upToTopHandler = () => {
     window.scrollTo(0, 0);
   };

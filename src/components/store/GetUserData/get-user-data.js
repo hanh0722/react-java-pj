@@ -19,6 +19,10 @@ const userDataSlice = createSlice({
         },
         finishedLoading(state){
             state.isLoading = false;
+        },
+        removeUserPersist(state) {
+            state.user = null;
+            state.isLoading = false;
         }
     }
 })
@@ -29,17 +33,19 @@ export const getUserDataHandler = (userEmail, token) => {
         return;
     }
     return async (dispatch) => {
+        dispatch(userDataActions.isLoadingFetch());
         const user = await axios({
             url: getUserByEmail(userEmail),
             headers: {
                 Authorization: 'Bearer ' + token,
                 'Content-Type': 'application/json'
             },
-        })
+        });
+        dispatch(userDataActions.finishedLoading());
         if(!user){
             return;
         }
-        dispatch(userDataActions.getUserFromServer(user));
+        dispatch(userDataActions.getUserFromServer(user.data));
     }
 }
 export default userDataSlice;
