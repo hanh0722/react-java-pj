@@ -29,10 +29,12 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
       return item.toLowerCase().includes(event.target.value.toLowerCase());
     });
     setFirstList(filterItemFromList);
-    dispatch(uploadActions.changeValueOfProduct({
-      type: TYPE_DISPATCH.TYPE,
-      value: event.target.value
-    }))
+    dispatch(
+      uploadActions.changeValueOfProduct({
+        type: TYPE_DISPATCH.TYPE,
+        value: event.target.value,
+      })
+    );
   };
 
   const setValueToInput = (name) => {
@@ -82,7 +84,6 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
       })
     );
   }, [getPercentOfInput, dispatch]);
-
   return (
     <BoxContainer className={styles.container}>
       <div className={`d-flex align-items-center ${styles.toggle}`}>
@@ -158,7 +159,7 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
         type="submit"
         variant="contained"
       >
-        {isLoading ? "Creating Product" : "Create Product"}
+        {isLoading ? "Uploading" : "Create Product"}
       </Button>
     </BoxContainer>
   );

@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ChangePasswordUser.module.scss";
 import BoxContainer from "../UI/BoxContainer/BoxContainer";
 import Input from "../../SignInAsset/Input/Input";
-import { checkInputIsEmpty } from "../../../util";
 import { isPassword } from "../../helper/validationInput";
 import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,18 +9,19 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import useToggle from "../../../hook/use-toggle";
 import Transition from '../../Transition/Transition';
 import useAxios from '../../../hook/use-axios';
-import { updatePasswordByToken } from "../../../config/url";
 import { useSelector, useDispatch } from "react-redux";
 import { NotifyActions } from "../../store/NotifyAfterLogin/NotifyAfterLogin";
+import { updatePasswordUser } from "../../../config/user/user";
 const ChangePasswordUser = () => {
   const token = useSelector(state => state.isAuth.token);
+  const user = useSelector(state => state.user?.user);
+  console.log(user);
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmpassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(false);
   const { toggle, changeToggleHandler } = useToggle(false);
   const {isLoading, error, data, fetchDataFromServer, status} = useAxios();
-  const oldPasswordRef = useRef();
 
   const passwordChangeHandler = (event) => {
     setPassword(event.target.value);
@@ -45,17 +45,16 @@ const ChangePasswordUser = () => {
     if (!passwordIsValid) {
       return;
     }
-    const oldPassword = oldPasswordRef.current.value;
     fetchDataFromServer({
-      url: updatePasswordByToken,
+      url: updatePasswordUser,
       method: 'PUT',
       headers: {
         Authorization: 'Bearer ' + token
       },
       data: {
-        oldPassword: oldPassword,
-        newPassword: password,
-        confirmPassword: confirmPassword
+        id: user?.id,
+        password: password,
+        confirm_password: confirmPassword
       }
     })
   };
@@ -79,18 +78,6 @@ const ChangePasswordUser = () => {
   return (
     <BoxContainer>
       <form onSubmit={submitFormHandler} className={styles.form}>
-        <Input
-          ref={oldPasswordRef}
-          functionCondition={(value) => checkInputIsEmpty(value)}
-          input={{
-            type: toggle ? "text" : "password",
-            placeholder: "Old Password",
-            required: true,
-            id: "old-password",
-          }}
-          label="Old password"
-          error="Old password must be filled"
-        />
         <Input
           functionCondition={(value) => isPassword(value)}
           input={{

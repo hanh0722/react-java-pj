@@ -6,13 +6,12 @@ import styles from "./FormUser.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import useAxios from "../../../../hook/use-axios";
-import { uploadSingleImageApi } from "../../../../config/url";
 import { key_multer } from "../../../../util/key-server";
 import { useDispatch } from "react-redux";
 import { NotifyActions } from "../../../store/NotifyAfterLogin/NotifyAfterLogin";
 import Skeleton from "../../../UI/LoadingSkeleton/Skeleton";
+import { uploadSingleImageApi } from "../../../../config/upload/upload";
 const FormUser = ({ user, setAvatar, avatar }) => {
-  console.log(avatar, user);
   const [url, setUrl] = useState(avatar);
   const dispatch = useDispatch();
   const { isLoading, error, data, fetchDataFromServer, percentLoading } =
@@ -41,8 +40,8 @@ const FormUser = ({ user, setAvatar, avatar }) => {
       }
     }
     if (!isLoading && !error && data) {
-      setUrl(data.data.url);
-      setAvatar(data.data.url);
+      setUrl(data.data?.url)
+      setAvatar(data?.data.url);
     }
     if (!isLoading && error) {
       dispatch(
@@ -58,9 +57,7 @@ const FormUser = ({ user, setAvatar, avatar }) => {
       className={`d-flex flex-column justify-content-center align-items-center ${styles.container}`}
     >
       <div className={styles.image}>
-        {!user && (
-          <Skeleton imageClassName="w-100 h-100 rounded-circle" src />
-        )}
+        {!user && <Skeleton imageClassName="w-100 h-100 rounded-circle" src />}
         {user && (
           <ImageUser
             src={url}

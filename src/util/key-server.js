@@ -1,4 +1,4 @@
-const key_multer = "images";
+const key_multer = "image";
 
 export {
     key_multer

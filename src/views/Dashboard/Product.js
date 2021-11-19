@@ -8,18 +8,18 @@ import Form from "../../components/DashBoard/Product/Form/Form";
 import Grid from "../../components/DashBoard/UI/Grid/Grid";
 import ProductOptions from "../../components/DashBoard/Product/ProductOptions/ProductOptions";
 import useFetch from "../../hook/use-fetch";
-import { uploadProductApi } from "../../config/url";
-import { key_multer } from "../../util/key-server";
+import { uploadProductApi } from "../../config/post/post";
 import Transition from "../../components/Transition/Transition";
 import FixLayout from "../../components/FixLayout/FixLayout";
 import styles from "../../styles/ProductView.module.scss";
 import Overlay from "../../components/overlay/Overlay";
-import {DASHBOARD_MATERIAL, DASHBOARD} from '../../components/link/link';
+import { DASHBOARD_MATERIAL, DASHBOARD } from "../../components/link/link";
 
 const Product = () => {
   const stateProduct = useSelector((state) => state.upload);
   const token = useSelector((state) => state.isAuth.token);
   const [isLoadingUpload, setIsLoadingUpload] = useState(false);
+  const [fileIsUploading, setFileIsUploading] = useState(false);
   const {
     getDataFromServerHandler,
     error,
@@ -34,44 +34,39 @@ const Product = () => {
     const product = {
       title: stateProduct.title,
       description: stateProduct.description,
-      inStock: stateProduct.inStock,
-      type_product: stateProduct.type,
+      in_stock: stateProduct.inStock,
+      category: stateProduct.type,
       regular_price: +stateProduct.regularPrice,
       sale_percent: +stateProduct.salePercent,
       last_price: +stateProduct.lastPrice,
+      image_urls: getFile,
     };
-    const formData = new FormData();
-    getFile.forEach((file) => {
-      formData.append(key_multer, file);
-    });
-    const turnProductToEntries = Object.entries(product);
-    turnProductToEntries.forEach(([key_pair, value]) => {
-      formData.append(key_pair, value);
-      // destructuring array of object entries
-    });
     getDataFromServerHandler({
       url: uploadProductApi,
       options: {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
+          'Content-Type': 'application/json'
         },
-        body: formData,
+        body: JSON.stringify(product),
       },
     });
   };
+  console.log(isLoading, error, data);
   const setFileHandler = useCallback((data) => {
     setFiles(data);
   }, []);
   const openModalHandler = useMemo(() => {
-    if(!isLoading && error){
+    if (!isLoading && error) {
       return true;
-    };
-    if(!isLoading && data && !error){
+    }
+    if (!isLoading && data && !error) {
       return true;
     }
     return false;
   }, [isLoading, error, data]);
+  console.log(fileIsUploading);
   return (
     <>
       <Transition
@@ -93,7 +88,10 @@ const Product = () => {
               {status === 500 && "Something went wrong, please try again"}
               {(status === 401 || status === 422) &&
                 "Please fill the form to upload product"}
-              {!error && data && status === 200 && "Uploaded product successfully"}
+              {!error &&
+                data &&
+                status === 200 &&
+                "Uploaded product successfully"}
             </p>
             <div className={styles["button-line"]}>
               {error && (
@@ -119,9 +117,13 @@ const Product = () => {
       <Container>
         <form onSubmit={uploadProductHandler}>
           <Grid>
-            <Form setIsLoadingUpload={setIsLoadingUpload} setFileHandler={setFileHandler} />
+            <Form
+              setFileIsUploading={setFileIsUploading}
+              setIsLoadingUpload={setIsLoadingUpload}
+              setFileHandler={setFileHandler}
+            />
             <ProductOptions
-              isLoading={isLoading}
+              isLoading={isLoading || fileIsUploading}
               onSubmit={uploadProductHandler}
               isLoadingUpload={isLoadingUpload}
             />

@@ -4,8 +4,9 @@ import FormUser from "../FormUser/FormUser";
 import DataForm from "../FormUser/DataForm/DataForm";
 import { useSelector, useDispatch } from "react-redux";
 import useAxios from "../../../../hook/use-axios";
-import { updateUserInformation } from "../../../../config/url";
 import { NotifyActions } from "../../../store/NotifyAfterLogin/NotifyAfterLogin";
+import { userDataActions } from "../../../store/GetUserData/get-user-data";
+import { changeInformationOfUser } from "../../../../config/user/user";
 const FormUploadUser = () => {
   const user = useSelector((state) => state.user?.user);
   const token = useSelector((state) => state.isAuth.token);
@@ -27,37 +28,31 @@ const FormUploadUser = () => {
       setAvatar(user?.avatar);
     }
   }, [user]);
-
   const updateUserHandler = (event) => {
     if (!user) {
       return;
     }
     event.preventDefault();
-    // fetchDataFromServer({
-    //   url: updateUserInformation,
-    //   method: "PUT",
-    //   headers: {
-    //     Authorization: "Bearer " + token,
-    //     "Content-Type": "application/json",
-    //   },
-    //   data: {
-    //     avatar: avatar,
-    //     name: nameRef.current.value,
-    //     phone_number: phoneRef.current.value,
-    //     country: country?.country || undefined,
-    //     address: addressRef.current.value,
-    //     email: user.email,
-    //     city: city?.city || undefined,
-    //     flag: country?.flag || undefined,
-    //     city_code: city?.code || undefined,
-    //   },
-    // });
     fetchDataFromServer({
-      
-    })
-    console.log(avatar, nameRef.current.value, phoneRef.current.value, country, city);
+      url: changeInformationOfUser,
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      data: {
+        avatar: avatar,
+        name: nameRef.current.value,
+        phone: phoneRef.current.value,
+        country: country?.country || null,
+        address: addressRef.current.value,
+        email: user.email,
+        city: city?.city || null,
+        flag: country?.flag || null,
+        code: city?.code || null,
+      },
+    });
   };
-  console.log(isLoading, error, data);
   useEffect(() => {
     if (!isLoading && error) {
       dispatch(
@@ -74,6 +69,7 @@ const FormUploadUser = () => {
           code: 200,
         })
       );
+      dispatch(userDataActions.getUserFromServer(data.data))
     }
   }, [error, isLoading, dispatch, data]);
   return (

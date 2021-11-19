@@ -34,7 +34,6 @@ const DataForm = ({
   );
 
   const { user, isLoading: isLoadingUser } = useSelector((state) => state.user);
-  console.log(user);
   return (
     <BoxContainer>
       <div className={`${styles.form} ${classes.form}`}>
