@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { NotifyActions } from "../../../store/NotifyAfterLogin/NotifyAfterLogin";
 import Skeleton from "../../../UI/LoadingSkeleton/Skeleton";
 const FormUser = ({ user, setAvatar, avatar }) => {
+  console.log(avatar, user);
   const [url, setUrl] = useState(avatar);
   const dispatch = useDispatch();
   const { isLoading, error, data, fetchDataFromServer, percentLoading } =

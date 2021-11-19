@@ -33,26 +33,31 @@ const FormUploadUser = () => {
       return;
     }
     event.preventDefault();
+    // fetchDataFromServer({
+    //   url: updateUserInformation,
+    //   method: "PUT",
+    //   headers: {
+    //     Authorization: "Bearer " + token,
+    //     "Content-Type": "application/json",
+    //   },
+    //   data: {
+    //     avatar: avatar,
+    //     name: nameRef.current.value,
+    //     phone_number: phoneRef.current.value,
+    //     country: country?.country || undefined,
+    //     address: addressRef.current.value,
+    //     email: user.email,
+    //     city: city?.city || undefined,
+    //     flag: country?.flag || undefined,
+    //     city_code: city?.code || undefined,
+    //   },
+    // });
     fetchDataFromServer({
-      url: updateUserInformation,
-      method: "PUT",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-      data: {
-        avatar: avatar,
-        name: nameRef.current.value,
-        phone_number: phoneRef.current.value,
-        country: country?.country || undefined,
-        address: addressRef.current.value,
-        email: user.email,
-        city: city?.city || undefined,
-        flag: country?.flag || undefined,
-        city_code: city?.code || undefined,
-      },
-    });
+      
+    })
+    console.log(avatar, nameRef.current.value, phoneRef.current.value, country, city);
   };
+  console.log(isLoading, error, data);
   useEffect(() => {
     if (!isLoading && error) {
       dispatch(
@@ -62,18 +67,25 @@ const FormUploadUser = () => {
         })
       );
     }
-    if(!isLoading && data && !error){
-      dispatch(NotifyActions.showedNotify({
-        message: 'Changed profile successfully',
-        code: 200
-      }))
+    if (!isLoading && data && !error) {
+      dispatch(
+        NotifyActions.showedNotify({
+          message: "Changed profile successfully",
+          code: 200,
+        })
+      );
     }
   }, [error, isLoading, dispatch, data]);
   return (
     <form onSubmit={updateUserHandler}>
       <Row>
         <Col xs={12} sm={12} md={5} lg={5}>
-          <FormUser user={user} setAvatar={setAvatar} avatar={avatar} isLoadingState={isLoading} />
+          <FormUser
+            user={user}
+            setAvatar={setAvatar}
+            avatar={avatar}
+            isLoadingState={isLoading}
+          />
         </Col>
         <Col xs={12} sm={12} md={7} lg={7}>
           <DataForm
