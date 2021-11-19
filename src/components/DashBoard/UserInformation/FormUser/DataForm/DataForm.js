@@ -33,19 +33,20 @@ const DataForm = ({
     [dispatch]
   );
 
-  const user = useSelector((state) => state.user.user?.user);
+  const { user, isLoading: isLoadingUser } = useSelector((state) => state.user);
+  console.log(user);
   return (
     <BoxContainer>
       <div className={`${styles.form} ${classes.form}`}>
         <Row>
           <Col xs={12} sm={12} md={6} lg={6}>
-            {!user && (
+            {!user && isLoadingUser && (
               <Skeleton
                 times={25}
                 containerSkeleton={classes["skeleton-container"]}
               />
             )}
-            {user && (
+            {user && !isLoadingUser && (
               <>
                 <Input
                   ref={forwardAllRef.nameRef}
@@ -81,21 +82,21 @@ const DataForm = ({
                   setCountry={setCountry}
                   getCityHandler={getCityFromList}
                   initialCountry={{
-                    country: user.basic_information.country,
-                    flag: user.basic_information.flag,
+                    country: user?.basic_information?.country,
+                    flag: user?.basic_information?.flag,
                   }}
                 />
               </>
             )}
           </Col>
           <Col xs={12} sm={12} md={6} lg={6}>
-            {!user && (
+            {isLoadingUser && (
               <Skeleton
                 times={25}
                 containerSkeleton={classes["skeleton-container"]}
               />
             )}
-            {user && (
+            {user && !isLoadingUser && (
               <>
                 <Input
                   ref={forwardAllRef.addressRef}
@@ -107,7 +108,7 @@ const DataForm = ({
                     placeholder: "Address",
                   }}
                   label={"Address"}
-                  initialValue={user.basic_information.address}
+                  initialValue={user?.basic_information?.address}
                 >
                   <FontAwesomeIcon icon={faMap} />
                 </Input>
@@ -129,7 +130,7 @@ const DataForm = ({
             )}
           </Col>
         </Row>
-        {user && (
+        {user && !isLoadingUser && (
           <Button
             onClick={onSubmit}
             disabled={isLoading}

@@ -39,7 +39,6 @@ const ResetPasswordUser = ({ token, _id }) => {
       }
     });
   };
-  console.log(isLoading, error, data);
   const passwordIsValid = useMemo(() => {
     if (!checkValidPassword(password)) {
       return false;

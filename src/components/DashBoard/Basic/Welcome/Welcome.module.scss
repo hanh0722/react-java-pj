@@ -34,15 +34,17 @@
     }
 }
 .image-skeleton{
-    width: 100px !important;
-    height: 100px !important;
-    border-radius: 20px;
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 10px;
 }
 .skeleton{
     height: 5px !important;
     margin-bottom: 10px !important;
 }
-
+.container-skeleton{
+    width: calc(100% - 170px);
+}
 @media screen and (max-width: 991px) {
     .content{
         .text{

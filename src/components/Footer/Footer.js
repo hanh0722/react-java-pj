@@ -27,7 +27,7 @@ const Footer = () => {
     const textContent = textRefTransform.current.textContent;
     const splitText = textContent.split('');
     const mapItem = splitText.map((item, index) => {
-      return <span key={index} data-aos="fade-down" data-aos-delay={250 * index}>{item}</span>
+      return <span key={index} data-aos="fade-up" data-aos-delay={250 * index}>{item}</span>
     })
     setState(mapItem);
   }, []);
@@ -44,32 +44,32 @@ const Footer = () => {
           </div>
         </div>
         <ul>
-          <li data-aos="fade-down" className={styles["title__list"]}>About</li>
+          <li data-aos="fade-up" className={styles["title__list"]}>About</li>
           {listAbout.map((item, index) => {
             return (
               <Link key={index} to="/">
-                <li data-aos="fade-down" data-aos-delay={250 * (index + 1)}>{item}</li>
+                <li data-aos="fade-up" data-aos-delay={250 * (index + 1)}>{item}</li>
               </Link>
             );
           })}
         </ul>
         <ul>
-          <li data-aos="fade-down" className={styles["title__list"]}>Information</li>
+          <li data-aos="fade-up" className={styles["title__list"]}>Information</li>
           {informationList.map((item, index) => {
             return (
               <Link key={index} to="/">
-                <li data-aos="fade-down" data-aos-delay={250 * (index + 1)}>{item}</li>
+                <li data-aos="fade-up" data-aos-delay={250 * (index + 1)}>{item}</li>
               </Link>
             );
           })}
         </ul>
         <ul>
-          <li data-aos="fade-down" className={styles["title__list"]}>Our Store</li>
+          <li data-aos="fade-up" className={styles["title__list"]}>Our Store</li>
           <div className="d-flex">
             {iconsSocial.map((item, index) => {
               return (
                 <Link to="/" key={index}>
-                  <li data-aos='fade-down' data-aos-delay={250 * (index + 1)} style={{ paddingRight: "15px" }}>
+                  <li data-aos='fade-up' data-aos-delay={250 * (index + 1)} style={{ paddingRight: "15px" }}>
                     <FontAwesomeIcon icon={item} />
                   </li>
                 </Link>

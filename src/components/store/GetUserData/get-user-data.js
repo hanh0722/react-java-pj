@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getUserByEmail } from "../../../config/user/user";
+import checkUserIsAdmin from "../../../util/checkUserIsAdmin";
 const initialState = {
     user: null,
-    isLoading: false
+    isLoading: false,
+    isAdmin: false
 }
 
 const userDataSlice = createSlice({
@@ -23,6 +25,10 @@ const userDataSlice = createSlice({
         removeUserPersist(state) {
             state.user = null;
             state.isLoading = false;
+            state.isAdmin = false;
+        },
+        setUserIsAdmin(state){
+            state.isAdmin = true;
         }
     }
 })
@@ -44,6 +50,12 @@ export const getUserDataHandler = (userEmail, token) => {
         dispatch(userDataActions.finishedLoading());
         if(!user){
             return;
+        }
+        const filterRole = user.data.role.filter(item => {
+            return item.toString() === 'ROLE_ADMIN';
+        })
+        if(filterRole.length === 1){
+            dispatch(userDataActions.setUserIsAdmin());
         }
         dispatch(userDataActions.getUserFromServer(user.data));
     }

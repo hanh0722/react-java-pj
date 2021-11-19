@@ -11,11 +11,20 @@ const Welcome = ({ user, isLoading }) => {
       <div
         className={`d-flex justify-content-between align-items-center w-100 ${styles.content}`}
       >
-        {isLoading && <Skeleton src times={8} reverse classSkeleton={styles.skeleton} imageClassName={styles['image-skeleton']}/>}
+        {isLoading && (
+          <Skeleton
+            src
+            times={8}
+            reverse
+            classSkeleton={styles.skeleton}
+            imageClassName={styles["image-skeleton"]}
+            containerSkeleton={styles['container-skeleton']}
+          />
+        )}
         {!isLoading && user && (
           <>
             <div className={styles.text}>
-              <h4>Welcome back - {user.user.name}</h4>
+              <h4>Welcome back - {user.name}</h4>
               <p>Go to introduction document</p>
               <Button variant="contained">Introduce</Button>
             </div>

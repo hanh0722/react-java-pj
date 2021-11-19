@@ -7,7 +7,7 @@ import useAxios from "../../../../hook/use-axios";
 import { updateUserInformation } from "../../../../config/url";
 import { NotifyActions } from "../../../store/NotifyAfterLogin/NotifyAfterLogin";
 const FormUploadUser = () => {
-  const user = useSelector((state) => state.user.user?.user);
+  const user = useSelector((state) => state.user?.user);
   const token = useSelector((state) => state.isAuth.token);
   const dispatch = useDispatch();
   const { isLoading, error, data, fetchDataFromServer } = useAxios();
@@ -19,10 +19,10 @@ const FormUploadUser = () => {
   const [city, setCity] = useState(null);
   useEffect(() => {
     if (user) {
-      setCountry(user?.basic_information.country);
+      setCountry(user?.basic_information?.country);
       setCity({
-        city: user?.basic_information.city,
-        code: user?.basic_information.city_code,
+        city: user?.basic_information?.city,
+        code: user?.basic_information?.city_code,
       });
       setAvatar(user?.avatar);
     }

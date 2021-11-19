@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Sidebar.module.scss";
 import { NavLink, Redirect } from "react-router-dom";
-import { DASHBOARD_MATERIAL, NOT_FOUND, SIGN_IN_PAGE } from "../../link/link";
+import { DASHBOARD_MATERIAL, SIGN_IN_PAGE } from "../../link/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../../image/logo.png";
@@ -16,9 +16,6 @@ import Transition from "../../Transition/Transition";
 import { DASHBOARD } from "../../link/link";
 import Ripple from "../../UI/Ripple/Ripple";
 import { checkUserIsAuth } from "../../store/IsAuth/is-auth";
-import useFetch from "../../../hook/use-fetch";
-import { getUserApi } from "../../../config/url";
-import { userDataActions } from "../../store/GetUserData/get-user-data";
 const SideBar = () => {
   const { dark } = useContext(DarkModeContext);
   const { toggle, changeToggleHandler } = useToggle(false);
@@ -26,42 +23,13 @@ const SideBar = () => {
     useToggle(false);
   const dispatch = useDispatch();
   const { token, isLoggedIn } = useSelector((state) => state.isAuth);
-  const { getDataFromServerHandler, data, error, isLoading, resetAllHandler } =
-    useFetch();
+  const { user, isLoading, isAdmin } = useSelector((state) => state.user);
+
   // don't put useEffect check in container => it'll render everytime user move to other page, not good for data so far
   useEffect(() => {
     dispatch(checkUserIsAuth());
   }, [dispatch]);
-  const getUserFromServer = useCallback(() => {
-    getDataFromServerHandler({
-      url: getUserApi,
-      options: {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    });
-  }, [getDataFromServerHandler, token]);
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-    getUserFromServer();
-    return () => {
-      resetAllHandler();
-    };
-  }, [getUserFromServer, token, resetAllHandler]);
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(userDataActions.isLoadingFetch());
-    } else {
-      if (!data || error) {
-        dispatch(userDataActions.finishedLoading());
-        return;
-      }
-      dispatch(userDataActions.getUserFromServer(data));
-    }
-  }, [isLoading, data, error, dispatch]);
+
   const renderListPath = (array) => {
     const mapPath = array.map((item) => {
       return (
@@ -90,7 +58,6 @@ const SideBar = () => {
   return (
     <>
       {!isLoggedIn && !token && <Redirect to={SIGN_IN_PAGE} />}
-      {!isLoading && error && <Redirect to={NOT_FOUND} />}
       <div
         className={`${styles["side--bar"]} ${
           toggle && styles["close--sidebar"]
@@ -112,7 +79,12 @@ const SideBar = () => {
             </div>
           </Ripple>
         </div>
-        <User isLoading={isLoading} data={data} toggle={toggle} />
+        <User
+          isLoading={isLoading}
+          isAdmin={isAdmin}
+          data={user}
+          toggle={toggle}
+        />
         <div className={styles.list}>
           <ul>
             <li>General</li>
@@ -122,7 +94,7 @@ const SideBar = () => {
             <li>E-Commerce</li>
             {renderListPath(DASHBOARD_MATERIAL.ECOMMERCE)}
           </ul>
-          {!isLoading && data && data.user.admin && (
+          {isAdmin && (
             <ul>
               <li>Admin</li>
               {renderListPath(DASHBOARD_MATERIAL.ADMIN)}
