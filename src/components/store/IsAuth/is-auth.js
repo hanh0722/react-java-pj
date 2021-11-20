@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { CartActions } from "../cart";
 const initialState = {
   isLoggedIn: !!localStorage.getItem('token/customer') ? true : false,
   // check if user has token or not, if we dont have token, initialstate must be false
@@ -21,12 +21,14 @@ const isAuthSlice = createSlice({
     setIsAuthenticated(state, action) {
       state.isLoggedIn = true;
       state.expired = false;
-      state.token = action.payload;
+      state.token = action.payload.token;
+      state.emailUser = action.payload.emailUser;
     },
     setIsLoggedOut(state) {
       state.isLoggedIn = false;
       state.expired = false;
       state.token = null;
+      state.emailUser = null;
       removeStorageHandler();
     },
     setExpired(state) {
@@ -42,6 +44,7 @@ export const checkUserIsAuth = () => {
     const trackingEmail = localStorage.getItem('tracking/user');
     if (!token || !expiryTime || !trackingEmail) {
       dispatch(isAuthActions.setIsLoggedOut());
+      dispatch(CartActions.resetCartHandler());
       return;
     }
     const dateNow = Date.now();

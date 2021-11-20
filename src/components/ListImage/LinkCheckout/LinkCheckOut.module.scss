@@ -16,9 +16,10 @@
             width: 100px;
             height: 100px;
         }
-        width: 20%;
+        width: 30%;
     }
-    line-height: 40px;
+    text-transform: capitalize;
+    line-height: 30px;
     p{
         font-size: 12px;
         &:first-child{

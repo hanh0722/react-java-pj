@@ -3,23 +3,23 @@ import SingleBlog from "../SingleBlog/SingleBlog";
 import Grid from "../../UI/Grid/Grid";
 import Container from "../../layout/container/Container";
 import useAxios from "../../../hook/use-axios";
-import { getAllPostsApi } from "../../../config/post";
 import getCurrentPage from "../../../util/getCurrentPage";
 import { useLocation, Redirect, useRouteMatch } from "react-router-dom";
 import Pagination from "../../Pagination/Pagination";
 import { NOT_FOUND } from "../../link/link";
 import RenderSkeletonProduct from "../../../util/RenderSkeletonProduct";
 import nonAccentVietnamese from "../../removeUnicode/removeUnicode";
+import { getBlogByPage } from "../../../config/post/post";
 const ViewBlog = () => {
   const { fetchDataFromServer, error, data, isLoading } = useAxios();
   const location = useLocation();
   const page = getCurrentPage(location.search);
   useEffect(() => {
     fetchDataFromServer({
-      url: getAllPostsApi,
+      url: getBlogByPage,
       params: {
         page: page,
-        perPage: 1,
+        per_page: 2,
       },
     });
   }, [page, fetchDataFromServer]);
@@ -29,7 +29,7 @@ const ViewBlog = () => {
       {!isLoading && error && <Redirect to={NOT_FOUND} />}
       <Container>
         <Grid>
-          {isLoading && !data && RenderSkeletonProduct(1)}
+          {isLoading && !data && RenderSkeletonProduct(2)}
           {!isLoading &&
             data &&
             data.data.blogs.map((blog) => {
@@ -48,7 +48,7 @@ const ViewBlog = () => {
         {!isLoading && data && (
           <Pagination
             currentPage={page}
-            perPage={1}
+            perPage={2}
             totalPage={data.data.total_documents}
           />
         )}

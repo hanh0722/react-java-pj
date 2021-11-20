@@ -16,7 +16,7 @@ import useToggle from "../hook/use-toggle";
 import Related from "../components/Detail/Related/Related";
 import HeaderPage from "../components/HeaderPage/HeaderPage";
 import useAxios from "../hook/use-axios";
-import { getProductById } from "../config/product";
+import { getProductById } from "../config/product/product";
 import DetailProduct from "../components/Detail/DetailProduct/DetailProduct";
 import { NOT_FOUND } from "../components/link/link";
 
@@ -50,10 +50,10 @@ const DetailItem = () => {
       {!isLoading && error && <Redirect to={NOT_FOUND} />}
       <HeaderPage
         isLoading={isLoading}
-        title={data?.data?.product?.title}
+        title={data?.data?.title}
         paths={[
           {
-            name: data?.data?.product?.title,
+            name: data?.data?.title,
             link: `${route.url}?id=${getProductId}`,
           },
         ]}
@@ -61,19 +61,16 @@ const DetailItem = () => {
       <Container className={styles.container}>
         <Row className={`${styles.row} justify-content-around`}>
           <Col xs={12} sm={12} md={6} lg={5} className={styles.image}>
-            <ListImage
-              isLoading={isLoading}
-              images={data?.data?.product?.images?.urls}
-            />
+            <ListImage isLoading={isLoading} images={data?.data?.imageUrls} />
           </Col>
           <DetailProduct
             isLoading={isLoading}
-            product={data?.data?.product}
+            product={data?.data}
             changeToggleHandler={changeToggleHandler}
             setContent={setContent}
           />
         </Row>
-        <MoreDetail isLoading={isLoading} detail={data?.data?.product} />
+        <MoreDetail isLoading={isLoading} detail={data?.data} />
         <Related />
       </Container>
       <CSSTransition
@@ -84,16 +81,16 @@ const DetailItem = () => {
         in={isValid}
       >
         <LinkCheckOut
-          product={data?.data?.product}
+          product={data?.data}
           isLoading={isLoading}
-          url={data?.data?.product?.images?.urls[0]}
+          url={data?.data?.imageUrls[0]}
         />
       </CSSTransition>
       <CSSTransition
+        timeout={800}
         in={toggle}
         unmountOnExit
         mountOnEnter
-        timeout={800}
         classNames="fade__box"
       >
         <>

@@ -13,6 +13,7 @@ import classes from "./DetailProduct.module.scss";
 import useCart from "../../../hook/use-cart";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../../store/cart";
+import { NotifyActions } from "../../store/NotifyAfterLogin/NotifyAfterLogin";
 const DetailProduct = ({
   product,
   changeToggleHandler,
@@ -27,22 +28,34 @@ const DetailProduct = ({
     error,
     isLoading: isLoadingAddCart,
     data,
+    resetAllHandler,
   } = useCart();
   useEffect(() => {
     if (!error && !isLoadingAddCart && data) {
       dispatch(CartActions.showCartHandler());
       dispatch(
         CartActions.addToCartHandler({
-          id: data.data.product._id,
-          name: data.data.product.title,
-          imageUrl: data.data.product.images.urls[0],
-          quantity: data.data.product.add_quantity,
-          price: data.data.product.last_price,
-          type: data.data.product.type_product,
+          id: data.data.id,
+          name: data.data.title,
+          imageUrl: data.data.imageUrls[0],
+          quantity: quantity,
+          price: data.data.lastPrice,
+          type: data.data.category,
         })
       );
     }
-  }, [error, isLoadingAddCart, data, dispatch]);
+    if (!isLoadingAddCart && error) {
+      dispatch(
+        NotifyActions.showedNotify({
+          message: "Cannot add item to cart",
+          code: 500,
+        })
+      );
+    }
+    return () => {
+      resetAllHandler();
+    };
+  }, [error, isLoadingAddCart, data, dispatch, quantity, resetAllHandler]);
   return (
     <>
       <Col
@@ -69,18 +82,18 @@ const DetailProduct = ({
           {isLoading && <Skeleton times={2} classSkeleton={classes.line} />}
           {!isLoading && product && (
             <>
-              {product.sale_percent !== 0 && (
+              {product.salePercent !== 0 && (
                 <p className={classes.sale}>
-                  Sale: <span>{product.sale_percent}%</span>{" "}
+                  Sale: <span>{product.salePercent}%</span>{" "}
                 </p>
               )}
               Price:{" "}
-              {product.sale_percent !== 0 && (
+              {product.salePercent !== 0 && (
                 <span className={classes["sale-value"]}>
-                  ${product.regular_price}
+                  ${product.regularPrice}
                 </span>
               )}{" "}
-              ${product.last_price}
+              ${product.lastPrice}
             </>
           )}
         </div>
@@ -96,7 +109,7 @@ const DetailProduct = ({
               In Stock: {product.inStock ? "Normal" : "Out of product"}
             </p>
             <p className={styles["quantity__title"]}>
-              Type: {product.type_product || "Other"}
+              Type: {product.category || "Other"}
             </p>
           </>
         )}
@@ -127,7 +140,7 @@ const DetailProduct = ({
               </div>
               <div className={styles["btn__add"]}>
                 <Button
-                  onClick={() => addCartHandler(quantity, product._id)}
+                  onClick={() => addCartHandler(quantity, product.id)}
                   variant="outlined"
                 >
                   Add To Cart

@@ -14,7 +14,6 @@ import FixLayout from "../../components/FixLayout/FixLayout";
 import styles from "../../styles/ProductView.module.scss";
 import Overlay from "../../components/overlay/Overlay";
 import { DASHBOARD_MATERIAL, DASHBOARD } from "../../components/link/link";
-
 const Product = () => {
   const stateProduct = useSelector((state) => state.upload);
   const token = useSelector((state) => state.isAuth.token);
@@ -53,7 +52,6 @@ const Product = () => {
       },
     });
   };
-  console.log(isLoading, error, data);
   const setFileHandler = useCallback((data) => {
     setFiles(data);
   }, []);
@@ -66,7 +64,6 @@ const Product = () => {
     }
     return false;
   }, [isLoading, error, data]);
-  console.log(fileIsUploading);
   return (
     <>
       <Transition

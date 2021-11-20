@@ -13,6 +13,7 @@ const FormPersonal = () => {
           id: "name",
           label: "Name",
           placeholder: "Name...",
+          value: "123"
         }}
         error='Name is empty!'
         checkCondition={(value) => value.trim().length > 0}

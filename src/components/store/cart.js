@@ -94,6 +94,13 @@ const CartSlice = createSlice({
     showCartHandler(state) {
       state.showCart = !state.showCart;
     },
+    resetCartHandler(state){
+      state.cart = [];
+      state.showCart = false;
+      state.isLoading = false;
+      state.total = 0;
+      state.discount = 0;
+    }
   },
 });
 export const CartActions = CartSlice.actions;

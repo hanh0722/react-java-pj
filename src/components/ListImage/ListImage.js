@@ -12,7 +12,6 @@ SwiperCore.use([Navigation, Pagination, Thumbs]);
 
 const ListImage = ({ images, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
   const renderImageSkeleton = (number) => {
     const array = [];
     for (let i = 1; i <= number; i++) {

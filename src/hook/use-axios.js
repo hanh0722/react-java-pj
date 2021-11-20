@@ -176,11 +176,11 @@ const useAxios = () => {
     },
     [dispatchEvent]
   );
-  const resetAllHandler = () => {
+  const resetAllHandler = useCallback(() => {
     dispatch({
       type: type.RESET
     })
-  }
+  }, []);
   return {
     isLoading: state.isLoading,
     percentLoading: state.percentLoading,

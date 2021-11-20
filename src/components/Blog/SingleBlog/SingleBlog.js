@@ -18,7 +18,7 @@ const SingleBlog = ({ imageUrl, type, title, description, url, preview, classNam
           </Link>
         )}
         <p className={styles.intro}>{description}</p>
-        {!preview && <Link to={url || "test"}>
+        {!preview && <Link to={url || ""}>
           <Button variant="outlined" className={`${styles.btn}`}>
             Read More
           </Button>

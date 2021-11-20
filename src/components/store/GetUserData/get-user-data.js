@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getUserByEmail } from "../../../config/user/user";
-import checkUserIsAdmin from "../../../util/checkUserIsAdmin";
 const initialState = {
     user: null,
     isLoading: false,

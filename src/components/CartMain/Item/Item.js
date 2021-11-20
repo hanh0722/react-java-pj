@@ -18,7 +18,7 @@ const Item = ({ imageUrl, name, price, quantity, id, type }) => {
       if (typeActions === TYPE_ACTIONS.REMOVE) {
         dispatch(
           CartActions.removeItemInCart({
-            id: data.data._id,
+            id: id,
           })
         );
       }
@@ -33,7 +33,7 @@ const Item = ({ imageUrl, name, price, quantity, id, type }) => {
 
   const removeItem = () => {
     setTypeActions(TYPE_ACTIONS.REMOVE);
-    removeItemFromCart(id, TYPE_ACTIONS.REMOVE);
+    removeItemFromCart(id, 0);
   };
   const incrementItemHandler = () => {
     setTypeActions(TYPE_ACTIONS.INCREMENT);
@@ -41,7 +41,7 @@ const Item = ({ imageUrl, name, price, quantity, id, type }) => {
   };
   const decrementItemHandler = () => {
     setTypeActions(TYPE_ACTIONS.DECREMENT);
-    removeItemFromCart(id, TYPE_ACTIONS.DECREMENT);
+    removeItemFromCart(id, 1);
   };
   return (
     <>

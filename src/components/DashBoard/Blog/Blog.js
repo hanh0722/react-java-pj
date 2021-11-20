@@ -12,7 +12,7 @@ const Blog = ({
   setTitleHandler,
   setDescriptionHandler,
   getFileOfDropzone,
-  setImageIsLoading
+  setImageIsLoading,
 }) => {
   const editorRef = useRef();
   const setValueEditorHandler = (htmlContent) => {

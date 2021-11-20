@@ -123,6 +123,7 @@
     z-index: -5;
     pointer-events: none;
     visibility: hidden;
+    text-transform: capitalize;
     a {
       margin: 0;
       padding: $sm-pd 0;

@@ -15,7 +15,7 @@ const MoreDetail = ({ isLoading, detail }) => {
     if(!detail){
       return;
     }
-    return randomElements(detail.images.urls).valueRandom;
+    return randomElements(detail.imageUrls).valueRandom;
   }, [detail]);
   return (
     <div>

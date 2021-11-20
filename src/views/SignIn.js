@@ -50,7 +50,10 @@ const SignIn = () => {
         Date.now() + 3 * 60 * 60 * 1000
       );
       localStorage.setItem('tracking/user', email);
-      dispatch(isAuthActions.setIsAuthenticated(token));
+      dispatch(isAuthActions.setIsAuthenticated({
+        token: token,
+        emailUser: email
+      }));
       dispatch(
         NotifyActions.showedNotify({
           message: "Success",

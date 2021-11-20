@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import styles from "./Navigation.module.scss";
 import logo from "../../image/logo.png";
@@ -27,16 +27,10 @@ import { isAuthActions } from "../store/IsAuth/is-auth";
 import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
 import { userDataActions } from "../store/GetUserData/get-user-data";
 import { DASHBOARD_MATERIAL, DASHBOARD, HOME_PAGE } from "../link/link";
+import useAxios from "../../hook/use-axios";
+import { getAllTypesOfProducts } from "../../config/product/product";
 const dataToolTip = ["Search", "Account", "WishList", "Cart"];
 const Icon = [faSearch, faUser, faHeart, faShoppingCart];
-const nestedPath = [
-  {
-    path: "indoor",
-    name: "Indoor Plans",
-  },
-  { path: "outdoor", name: "Outdoor Plans" },
-  { path: "veggies", name: "Herb + Veggies" },
-];
 const Navigation = ({ isDowned }) => {
   const history = useHistory();
   const DarkModeCtx = useContext(DarkModeContext);
@@ -45,6 +39,7 @@ const Navigation = ({ isDowned }) => {
   const clickHandler = () => {
     dispatch(hamburgerActions.setClickedHandler());
   };
+  const { isLoading, data, fetchDataFromServer } = useAxios();
   const state = useSelector((state) => state.hamburger.isClicked);
   const cart = useSelector((state) => state.cart.cart);
   const wishlist = useSelector((state) => state.wishlist.wishlist);
@@ -57,6 +52,7 @@ const Navigation = ({ isDowned }) => {
   };
   const signOutHandler = () => {
     dispatch(isAuthActions.setIsLoggedOut());
+    dispatch(CartActions.resetCartHandler());
     dispatch(userDataActions.removeUserPersist());
     dispatch(
       NotifyActions.showedNotify({
@@ -66,6 +62,11 @@ const Navigation = ({ isDowned }) => {
     );
     history.replace(HOME_PAGE);
   };
+  useEffect(() => {
+    fetchDataFromServer({
+      url: getAllTypesOfProducts,
+    });
+  }, [fetchDataFromServer]);
   return (
     <>
       <nav className={`${isDowned && styles["nav__top"]} ${styles.nav}`}>
@@ -111,17 +112,19 @@ const Navigation = ({ isDowned }) => {
               </p>
               <LayoutList isClicked={showedUp} setBack={setShowedUpHandler}>
                 <div className={styles["list__inside"]}>
-                  {nestedPath.map((items) => {
-                    return (
-                      <NavLink
-                        onClick={!isOpenSignOutDesktop ? clickHandler : null}
-                        to={`/products/${items.path}`}
-                        key={items.name}
-                      >
-                        {items.name}
-                      </NavLink>
-                    );
-                  })}
+                  {!isLoading &&
+                    data &&
+                    data?.data?.map((item) => {
+                      return (
+                        <NavLink
+                          to={`/products/${item}`}
+                          key={item}
+                          onClick={!isOpenSignOutDesktop ? clickHandler : null}
+                        >
+                          {item}
+                        </NavLink>
+                      );
+                    })}
                 </div>
               </LayoutList>
             </div>

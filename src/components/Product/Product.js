@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Product.module.scss";
 import { Button } from "@material-ui/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../store/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
@@ -18,12 +16,12 @@ const Product = (props) => {
     if (!isLoading && data && !error) {
       dispatch(
         CartActions.addToCartHandler({
-          id: data.data.product._id,
-          name: data.data.product.title,
-          imageUrl: data.data.product.images.urls[0],
-          quantity: data.data.product.add_quantity,
-          price: data.data.product.last_price,
-          type: data.data.product.type_product,
+          id: data.data.id,
+          name: data.data.title,
+          imageUrl: data.data.imageUrls[0],
+          quantity: 1,
+          price: data.data.lastPrice,
+          type: data.data.category,
         })
       );
       dispatch(CartActions.showCartHandler());
@@ -39,11 +37,11 @@ const Product = (props) => {
           <>
             <img src={props.imageUrl} alt="ImageItem" />
             <div className={styles.overlay}>
-              <div
+              {/* <div
                 className={`${styles.icon} d-flex justify-content-center align-items-center`}
               >
                 <FontAwesomeIcon icon={faStar} />
-              </div>
+              </div> */}
               <div className={styles.btn}>
                 <Button onClick={addCartHandler} variant="contained">
                   Add to cart

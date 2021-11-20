@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Overlay from "../../components/overlay/Overlay";
 import BlogDashBoard from "../../components/DashBoard/Blog/Blog";
@@ -6,9 +6,8 @@ import Container from "../../components/DashBoard/layout/Container";
 import { Row, Col } from "react-bootstrap";
 import Options from "../../components/DashBoard/Blog/Options/Options";
 import { checkInputIsEmpty } from "../../util";
-import { key_multer } from "../../util/key-server";
 import useAxios from "../../hook/use-axios";
-import { createPostApi } from "../../config/post";
+import { createPostApi } from "../../config/post/post";
 import { useSelector, useDispatch } from "react-redux";
 import { NotifyActions } from "../../components/store/NotifyAfterLogin/NotifyAfterLogin";
 import Preview from "../../components/DashBoard/Blog/Preview/Preview";
@@ -39,24 +38,20 @@ const Blog = () => {
     event.preventDefault();
     const blogObjectMatchServer = {
       title: title,
-      category: category ? category : undefined,
+      category: category ? category[0] : null,
       content: getValueEditor,
       short_description: description,
       is_public: isPublic,
+      cover_image: images[0],
     };
-    const formData = new FormData();
-    formData.append(key_multer, images[0]);
-    const convertObjectToArray = Object.entries(blogObjectMatchServer);
-    convertObjectToArray.forEach((field) => {
-      formData.append(field[0], field[1]);
-    });
     fetchDataFromServer({
       url: createPostApi,
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
+        'Content-Type': 'application/json'
       },
-      data: formData,
+      data: blogObjectMatchServer
     });
   };
   const setTitleHandler = (event) => {
@@ -65,9 +60,9 @@ const Blog = () => {
   const setDescriptionHandler = (event) => {
     setDescription(event.target.value);
   };
-  const getFileOfDropzone = (files) => {
+  const getFileOfDropzone = useCallback((files) => {
     setImages(files);
-  };
+  }, []);
   useEffect(() => {
     if (!isLoading && data) {
       dispatch(
@@ -87,10 +82,10 @@ const Blog = () => {
     }
   }, [error, dispatch, isLoading, data]);
   useEffect(() => {
-    if(isPreview){
-      document.body.setAttribute('fixed-body', 'fixed');
+    if (isPreview) {
+      document.body.setAttribute("fixed-body", "fixed");
     } else {
-      document.body.removeAttribute('fixed-body');
+      document.body.removeAttribute("fixed-body");
     }
   }, [isPreview]);
   const previewPostHandler = () => {

@@ -7,6 +7,8 @@ import Transition from "../Transition/Transition";
 import { uploadMultipleImageApi } from "../../config/upload/upload";
 import { key_multer } from "../../util/key-server";
 import useAxios from "../../hook/use-axios";
+import { useDispatch } from "react-redux";
+import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
 import { v4 as uuid } from "uuid";
 const DropzoneUpload = forwardRef(
   ({ getFileOfDrop, title, maxFiles, config, setFileIsUploading }, ref) => {
@@ -16,6 +18,7 @@ const DropzoneUpload = forwardRef(
       maxFiles: maxFiles || 5,
       ...config,
     });
+    const dispatch = useDispatch();
     const { isLoading, error, data, fetchDataFromServer } = useAxios();
     const removeItemHandler = (id) => {
       const filterImageArray = imageUpload.filter((file) => {
@@ -58,6 +61,12 @@ const DropzoneUpload = forwardRef(
           setFileIsUploading(true);
         }
       }
+      if(!isLoading && error){
+        dispatch(NotifyActions.showedNotify({
+          message: 'Cannot generate url',
+          code: 500
+        }))
+      }
       if (!isLoading && data) {
         const urls = data.data.urls.map((item) => {
           return {
@@ -73,7 +82,7 @@ const DropzoneUpload = forwardRef(
         }
         setImageUpload(urls);
       }
-    }, [isLoading, data, getFileOfDrop, setFileIsUploading]);
+    }, [isLoading, data, getFileOfDrop, setFileIsUploading, error, dispatch]);
     return (
       <>
         <Transition

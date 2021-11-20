@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useAxios from "../../../../hook/use-axios";
-import { getAllTypesOfProducts } from "../../../../config/product";
+import { getAllTypesOfProducts } from "../../../../config/product/product";
 import Skeleton from "../../../UI/LoadingSkeleton/Skeleton";
 const FetchTypeProduct = ({ onClick, firstList, setFirstList, setList }) => {
   const { isLoading, data, fetchDataFromServer, error } = useAxios();
@@ -14,8 +14,8 @@ const FetchTypeProduct = ({ onClick, firstList, setFirstList, setList }) => {
   }, [fetchDataFromServer, firstList]);
   useEffect(() => {
     if (!isLoading && data) {
-      setFirstList(data.data.types_product);
-      setList(data.data.types_product)
+      setFirstList(data.data);
+      setList(data.data);
     }
   }, [isLoading, data, setFirstList, setList]);
   return (
@@ -39,7 +39,9 @@ const FetchTypeProduct = ({ onClick, firstList, setFirstList, setList }) => {
           Cannot get type of products, please try again
         </p>
       )}
-      {!isLoading && data && data?.length === 0 && <p className="text-center">We don't have any suggestion! Add one</p>}
+      {!isLoading && data && data?.length === 0 && (
+        <p className="text-center">We don't have any suggestion! Add one</p>
+      )}
     </>
   );
 };

@@ -17,6 +17,7 @@ import MessageSideBar from "./components/MessageSideBar/MessageSideBar";
 import ProgressLoading from "./components/ProgressLoading/ProgressLoading";
 import { checkUserIsAuth } from "./components/store/IsAuth/is-auth";
 import { getUserDataHandler } from "./components/store/GetUserData/get-user-data";
+import { CartActions } from "./components/store/cart";
 const App = () => {
   const [navigation, setNavigation] = useState(false);
   const location = useLocation();
@@ -56,6 +57,7 @@ const App = () => {
   useEffect(() => {
     const { token, isLoggedIn, emailUser } = isAuth;
     if (!token || !isLoggedIn || !emailUser) {
+      dispatch(CartActions.resetCartHandler());
       return;
     }
     dispatch(getUserDataHandler(emailUser, token));

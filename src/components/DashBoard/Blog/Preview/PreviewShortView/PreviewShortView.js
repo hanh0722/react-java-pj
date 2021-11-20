@@ -10,8 +10,8 @@ const PreviewShortView = ({ dataPreview }) => {
     <h5 className={`text-center ${styles.title}`}>Preview Outside Screen</h5>
       <SingleBlog
         imageUrl={
-          dataPreview.images.length > 0
-            ? URL.createObjectURL(dataPreview.images[0])
+          dataPreview.images.length > 0 ?
+            dataPreview.images[0]
             : ImageDefault
         }
         preview

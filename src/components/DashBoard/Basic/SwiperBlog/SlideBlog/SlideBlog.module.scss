@@ -2,7 +2,7 @@
 .slide {
   position: relative;
   z-index: 4;
-  border-radius: 15px;
+  overflow: hidden;
   &::before {
     position: absolute;
     top: 0;

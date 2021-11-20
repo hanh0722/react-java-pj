@@ -8,7 +8,7 @@ import CategoriesBlog from "../components/Blog/CategoriesBlog/CategoriesBlog";
 import RecentPost from "../components/Blog/RecentPost/RecentPost";
 import styles from "../styles/DetailBlog.module.scss";
 import useAxios from "../hook/use-axios";
-import { getBlogById } from "../config/post";
+import { getBlogById } from "../config/post/post";
 import Skeleton from "../components/UI/LoadingSkeleton/Skeleton";
 import { NOT_FOUND } from "../components/link/link";
 const DetailBlog = ({
@@ -45,10 +45,10 @@ const DetailBlog = ({
     if (!previewMode && !isLoading && dataFetching) {
       return (
         <HeaderPage
-          title={dataFetching.data.post.title}
+          title={dataFetching.data.title}
           paths={[
             {
-              name: dataFetching.data.post.title,
+              name: dataFetching.data.title,
               link: route.url,
             },
           ]}
@@ -71,13 +71,13 @@ const DetailBlog = ({
     if (!isLoading && dataFetching && !previewMode) {
       return (
         <BlogDetail
-          category={dataFetching.data.post.category || "Others"}
-          user={dataFetching.data.post.creator?.name}
+          category={dataFetching.data.category || "Others"}
+          user={"ADMIN"}
           timeCreated={new Date(
-            dataFetching.data.post.time_created
+            dataFetching.data.time_created
           ).toLocaleDateString("vi-vn")}
-          contentBlog={dataFetching.data.post.content}
-          title={dataFetching.data.post.title}
+          contentBlog={dataFetching.data.content}
+          title={dataFetching.data.title}
         />
       );
     }

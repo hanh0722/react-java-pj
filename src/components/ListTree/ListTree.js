@@ -11,40 +11,52 @@ import Slide from "./Slide/Slide";
 import { useDispatch } from "react-redux";
 import { wishListActions } from "../store/wish-list";
 import useAxios from "../../hook/use-axios";
-import { getProductByType } from "../../config/product";
+import {
+  getProductByType,
+  getAllTypesOfProducts,
+} from "../../config/product/product";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
 import Grid from "../UI/Grid/Grid";
-import useMedia from '../../hook/use-media';
+import useMedia from "../../hook/use-media";
+
 SwiperCore.use([Navigation, Pagination]);
 
 const ListTree = () => {
   const [type, setType] = useState("indoor");
   const dispatch = useDispatch();
-  const desktopScreen = useMedia('(min-width: 991px)');
-  const quiteLargeScreen = useMedia('(min-width: 768px)');
-  const mediumScreen = useMedia('(min-width: 576px)');
-  const smallScreen = useMedia('(min-width: 400px');
+  const desktopScreen = useMedia("(min-width: 991px)");
+  const quiteLargeScreen = useMedia("(min-width: 768px)");
+  const mediumScreen = useMedia("(min-width: 576px)");
+  const smallScreen = useMedia("(min-width: 400px");
   const { isLoading, fetchDataFromServer, error, data } = useAxios();
+  const {
+    isLoading: isLoadingType,
+    fetchDataFromServer: fetchTypeServer,
+    error: errorType,
+    data: dataType,
+  } = useAxios();
   useEffect(() => {
     fetchDataFromServer({
-      url: getProductByType,
-      params: {
-        type_product: type,
-      },
+      url: getProductByType(type),
     });
   }, [fetchDataFromServer, type]);
 
+  useEffect(() => {
+    fetchTypeServer({
+      url: getAllTypesOfProducts,
+    });
+  }, [fetchTypeServer]);
   const addToWishList = (product) => {
     dispatch(wishListActions.addToWishList(product));
   };
   const renderLoading = useMemo(() => {
-    if(desktopScreen){
+    if (desktopScreen) {
       return 5;
-    } else if(quiteLargeScreen){
+    } else if (quiteLargeScreen) {
       return 4;
-    } else if(mediumScreen){
+    } else if (mediumScreen) {
       return 3;
-    } else if(smallScreen){
+    } else if (smallScreen) {
       return 2;
     } else {
       return 1;
@@ -72,24 +84,21 @@ const ListTree = () => {
       <Container aos="fade-up">
         <h3 className={`text-center ${styles.title}`}>Perfect Plants</h3>
         <ul className={styles.options}>
-          <li
-            className={type === "indoor" ? styles.active : ""}
-            onClick={() => setType("indoor")}
-          >
-            Indoor plants
-          </li>
-          <li
-            className={type === "outdoor" ? styles.active : ""}
-            onClick={() => setType("outdoor")}
-          >
-            Outdoor plants
-          </li>
-          <li
-            className={type === "veggies" ? styles.active : ""}
-            onClick={() => setType("veggies")}
-          >
-            Herbs + Veggies
-          </li>
+          {isLoadingType && <Skeleton times={1} />}
+          {!isLoadingType && errorType && <p className="text-center error__text">Cannot get types</p>}
+          {!isLoadingType &&
+            dataType &&
+            dataType?.data?.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  onClick={() => setType(item)}
+                  className={type === item ? styles.active : ""}
+                >
+                  {item} plants
+                </li>
+              );
+            })}
         </ul>
         {!isLoading && error && (
           <p className="text-center">Something went wrong, please try again</p>
@@ -125,7 +134,7 @@ const ListTree = () => {
               },
             }}
             loop={false}
-            navigation={true}
+            navigation={data?.data?.products.length === 0 ? false : true}
             pagination={{ clickable: true }}
             autoplay={{ delay: 5000 }}
           >
@@ -135,8 +144,8 @@ const ListTree = () => {
                   <Slide
                     name={product.title}
                     price={product.last_price}
-                    imageUrl={product.images.urls[0]}
-                    type={product.type_product}
+                    imageUrl={product.image_urls[0]}
+                    type={product.category}
                     id={product._id}
                     addtoWishList={addToWishList}
                   />
@@ -147,7 +156,7 @@ const ListTree = () => {
         )}
         {!isLoading && data?.data?.products?.length === 0 && (
           <p className="text-center">
-            No Products for type {type.toUpperCase()}
+            No Products for type <span className="error__text">{type.toUpperCase()}</span>
           </p>
         )}
       </Container>

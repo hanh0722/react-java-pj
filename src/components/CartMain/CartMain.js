@@ -13,8 +13,8 @@ import "../CSSTransition/CSSTransition.scss";
 import { Link } from "react-router-dom";
 import { CHECK_OUT_PAGE } from "../link/link";
 import useAxios from "../../hook/use-axios";
-import { getCartOfUser } from "../../config/cart";
 import Skeleton from "../UI/LoadingSkeleton/Skeleton";
+import { getCartApi } from "../../config/cart/cart";
 const CartMain = () => {
   const token = useSelector((state) => state.isAuth.token);
   const isLoggedIn = useSelector((state) => state.isAuth.isLoggedIn);
@@ -30,7 +30,7 @@ const CartMain = () => {
       return;
     }
     fetchDataFromServer({
-      url: getCartOfUser,
+      url: getCartApi,
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -42,14 +42,15 @@ const CartMain = () => {
     }
     if (!isLoading && !error && data) {
       dispatch(CartActions.finishLoadingCartHandler());
+      console.log(data);
       const transformCart = data.data.cart.map((product) => {
         return {
-          id: product._id,
-          name: product.title,
-          imageUrl: product.images.urls[0],
+          id: product._id._id,
+          name: product._id.title,
+          imageUrl: product._id.image_urls[0],
           quantity: product.quantity,
-          price: product.last_price,
-          type: product.type_product,
+          price: product._id.last_price,
+          type: product._id.category,
         };
       });
       dispatch(CartActions.setCartHandler(transformCart));
@@ -176,7 +177,7 @@ const CartMain = () => {
                 </p>
                 {cart.length > 0 && (
                   <Link to={CHECK_OUT_PAGE}>
-                    <Button variant="contained" type="submit">
+                    <Button onClick={() => dispatch(CartActions.showCartHandler())} variant="contained" type="submit">
                       Checkout
                     </Button>
                   </Link>

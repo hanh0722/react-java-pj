@@ -46,7 +46,7 @@ const Options = ({
               value: category,
               onChange: getCategoryByComma,
             }}
-            label='Category (multiple must have "," after)'
+            label='Category'
           >
             <FontAwesomeIcon icon={faClipboard} />
           </Input>
