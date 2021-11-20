@@ -10,7 +10,7 @@ import "../CSSTransition/CSSTransition.scss";
 import { ProductActions } from "../store/Product";
 import { CartActions } from "../store/cart";
 import useAxios from "../../hook/use-axios";
-import { getProductById } from "../../config/product";
+import { getProductById } from "../../config/product/product";
 import { randomElements } from "../../util/random-array";
 import nonAccentVietnamese from "../removeUnicode/removeUnicode";
 import ParseHTML from "../../util/ParseHTML";
@@ -57,21 +57,22 @@ const ViewShortItem = () => {
     if (!isLoadingAddCart && dataAddCart) {
       dispatch(
         CartActions.addToCartHandler({
-          id: dataAddCart.data.product._id,
-          name: dataAddCart.data.product.title,
-          imageUrl: dataAddCart.data.product.images.urls[0],
-          quantity: dataAddCart.data.product.add_quantity,
-          price: dataAddCart.data.product.last_price,
-          type: dataAddCart.data.product.type_product,
+          id: dataAddCart.data._id,
+          name: dataAddCart.data.title,
+          imageUrl: dataAddCart.data.imageUrls[0],
+          quantity: quantity,
+          price: dataAddCart.data.lastPrice,
+          type: dataAddCart.data?.category,
         })
       );
       dispatch(CartActions.showCartHandler());
       resetHandler();
     }
-  }, [dispatch, resetHandler, isLoadingAddCart, dataAddCart]);
+  }, [dispatch, resetHandler, isLoadingAddCart, dataAddCart, quantity]);
+  console.log(isLoading, data, error);
   const _renderRandomImage = useMemo(() => {
     if (data) {
-      return randomElements(data.data.product.images.urls).valueRandom;
+      return randomElements(data.data.imageUrls).valueRandom;
     }
   }, [data]);
   return (
@@ -107,21 +108,19 @@ const ViewShortItem = () => {
                   <div className={styles["content__product"]}>
                     <Link
                       className={styles.text}
-                      to={`/shop/${nonAccentVietnamese(
-                        data.data.product.title
-                      )}?id=${data.data.product._id}`}
+                      to={`/shop/${nonAccentVietnamese(data.data.title)}?id=${
+                        data.data.id
+                      }`}
                     >
-                      {data.data.product.title}
+                      {data.data.title}
                     </Link>
-                    <p>Price: ${data.data.product.last_price}</p>
+                    <p>Price: ${data.data.lastPrice}</p>
                     <div className={styles.content}>
-                      <ParseHTML string={data.data.product.description} />
+                      <ParseHTML string={data.data.description} />
                     </div>
                     <div className={styles.type}>
                       Style:{" "}
-                      <span className={styles.text}>
-                        {data.data.product.type_product}
-                      </span>
+                      <span className={styles.text}>{data.data.category}</span>
                     </div>
                   </div>
                   <div
