@@ -54,7 +54,10 @@ export const checkUserIsAuth = () => {
       removeStorageHandler();
       return;
     } else {
-      dispatch(isAuthActions.setIsAuthenticated(token));
+      dispatch(isAuthActions.setIsAuthenticated({
+        token: token,
+        emailUser: trackingEmail
+      }));
     }
     const timeLeft = expiryTime - dateNow;
     setTimeout(() => {

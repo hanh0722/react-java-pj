@@ -42,7 +42,6 @@ const CartMain = () => {
     }
     if (!isLoading && !error && data) {
       dispatch(CartActions.finishLoadingCartHandler());
-      console.log(data);
       const transformCart = data.data.cart.map((product) => {
         return {
           id: product._id._id,

@@ -23,14 +23,44 @@
 .title{
     font-size: $fs-sm;
 }
+.image{
+    width: 100%;
+    min-height: 220px;
+}
+.grid{
+    grid-template-columns: repeat(6, 1fr);
+    padding-top: 30px;
+    .contain{
+        display: block !important;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .image{
+        min-height: 150px;
+    }
+}
 @media screen and (max-width: 991px) {
     .items{
+        height: 50vh;
+        overflow: scroll;
+    }
+    .grid{
+        grid-template-columns: repeat(4, 1fr);
         height: 50vh;
         overflow: scroll;
     }
 }
 @media screen and (max-width: 768px) {
     .items{
+        height: 70vh;
+    }
+    .grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (max-width: 576px) {
+    .grid{
+        grid-template-columns: repeat(2, 1fr);
         height: 70vh;
     }
 }

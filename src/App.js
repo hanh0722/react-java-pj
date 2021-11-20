@@ -23,6 +23,7 @@ const App = () => {
   const location = useLocation();
   const state = useSelector((state) => state.hamburger.isShowed);
   const isAuth = useSelector((state) => state.isAuth);
+  console.log(isAuth);
   const dispatch = useDispatch();
   const getScrollHandler = useCallback(() => {
     let newValue;

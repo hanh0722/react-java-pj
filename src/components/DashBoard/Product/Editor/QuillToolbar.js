@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Quill } from "react-quill";
-import { uploadSingleImageApi } from "../../../../config/url";
+import { uploadSingleImageApi } from "../../../../config/upload/upload";
 import { key_multer } from "../../../../util/key-server";
 import "./Editor.scss";
 // Custom Undo button icon component for Quill editor. You can import it directly
