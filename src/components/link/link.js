@@ -1,4 +1,4 @@
-import { faDesktop, faPercentage, faShoppingCart, faBan, faHome, faStore} from "@fortawesome/free-solid-svg-icons";
+import { faDesktop, faPercentage, faShoppingCart, faBan, faHome, faStore, faCube} from "@fortawesome/free-solid-svg-icons";
 import { faUser, faChartBar, faNewspaper } from "@fortawesome/free-regular-svg-icons";
 
 export const HOME_PAGE = '/';
@@ -69,7 +69,7 @@ export const DASHBOARD_MATERIAL = {
         },
         {
             icon: faNewspaper,
-            name: 'Blog',
+            name: 'Create Blog',
             path: '/blog'
         },
         {
@@ -81,7 +81,12 @@ export const DASHBOARD_MATERIAL = {
             icon: faStore,
             name: 'Product',
             path: '/product'
-        }
+        },
+        {
+            icon: faCube,
+            name: 'All Blogs',
+            path: '/all-blogs'
+        },
     ],
     CHANGE_VALUE_USER: '/user/account'
 }

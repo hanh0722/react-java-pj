@@ -69,7 +69,6 @@ const ViewShortItem = () => {
       resetHandler();
     }
   }, [dispatch, resetHandler, isLoadingAddCart, dataAddCart, quantity]);
-  console.log(isLoading, data, error);
   const _renderRandomImage = useMemo(() => {
     if (data) {
       return randomElements(data.data.imageUrls).valueRandom;

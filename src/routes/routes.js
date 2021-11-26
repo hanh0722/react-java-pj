@@ -40,6 +40,7 @@ import {
   UserInformation,
   BlogDashboard,
   DetailBlog,
+  AllBlogs
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -122,6 +123,10 @@ export const RoutesConfig = [
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[1].path}`,
     component: BlogDashboard,
+  },
+  {
+    path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[4].path}`,
+    component: AllBlogs
   },
   {
     path: NOT_FOUND,
