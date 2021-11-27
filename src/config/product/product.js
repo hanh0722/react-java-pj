@@ -9,6 +9,7 @@ const getProductByType = type => `${SERVER_URL_NODEJS}/api/product/get/${type}`;
 const getProductById = id => `${SERVER_URL_JAVA}/api/product/get/${id}`;
 
 const getProductByKeyword = `${SERVER_URL_NODEJS}/api/product/search`;
+
 export {
     getAllProductFromServer,
     getAllTypesOfProducts,

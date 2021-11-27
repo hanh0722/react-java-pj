@@ -47,6 +47,7 @@ const ViewBlog = () => {
         </Grid>
         {!isLoading && data && (
           <Pagination
+            className="pt-5 ps-0"
             currentPage={page}
             perPage={2}
             totalPage={data.data.total_documents}

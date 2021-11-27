@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple";
 import styles from './Ripple.module.scss';
-const Ripple = ({ className, children }) => {
+const Ripple = ({ className, children, onBlur, onFocus }) => {
     const rippleRef = useRef(null);
     const onRippleStart = event => {
         rippleRef.current.start(event);
@@ -10,7 +10,7 @@ const Ripple = ({ className, children }) => {
         rippleRef.current.stop(event);
     }
   return (
-    <div onMouseDown={onRippleStart} onMouseUp={onRippleStop} className={`${styles.ripple} ${className}`}>
+    <div onBlur={onBlur ? onBlur : null} onFocus={onFocus ? onFocus : null} onMouseDown={onRippleStart} onMouseUp={onRippleStop} className={`${styles.ripple} ${className}`}>
       {children}
       <TouchRipple ref={rippleRef} center={false}/>
     </div>

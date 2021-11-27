@@ -19,6 +19,7 @@ import {
   DASHBOARD,
   BLOG_DETAIL,
 } from "../components/link/link";
+import AllProducts from "../views/Dashboard/AllProducts";
 import {
   Index,
   Blog,
@@ -128,6 +129,10 @@ export const RoutesConfig = [
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[4].path}`,
     component: AllBlogs
+  },
+  {
+    path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[5].path}`,
+    component: AllProducts
   },
   {
     path: NOT_FOUND,

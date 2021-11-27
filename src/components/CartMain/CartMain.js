@@ -102,7 +102,7 @@ const CartMain = () => {
         <div
           className={`${styles["cart__items"]} ${
             cart.length === 0 &&
-            "d-flex justify-content-center align-items-center"
+            "d-flex justify-content-center align-items-center flex-column"
           }`}
         >
           {isLoading && renderSkeleton(2)}

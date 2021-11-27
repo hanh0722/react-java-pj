@@ -1,0 +1,108 @@
+@import '../../../constant/variable';
+.container{
+    overflow-y: scroll;
+    border-bottom: 1px solid var(--border-color);
+}
+.table{
+    width: 100%;
+    margin-top: 30px;
+    th, tr, td{
+        padding: 24px;
+        font-size: $fs-sm;
+    }
+    tr{
+        padding-bottom: 5px !important;
+        text-transform: capitalize;
+    }
+    tr{
+        border-bottom: 1px solid var(--border-color);
+        &:first-child{
+            border-bottom: none;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        &:last-child{
+            border-bottom: none;
+        }
+    }
+    .status{
+        background: rgba(84, 214, 44, 0.16);
+        color: rgb(34, 154, 22);
+        padding: 5px;
+        border-radius: 5px;
+    }
+    th{
+        &:first-child{
+            min-width: 300px;
+            word-break: break-all;
+        }
+        &:nth-of-type(2){
+            min-width: 150px;
+        }
+        &:nth-of-type(3){
+            min-width: 100px;
+        }
+        &:nth-of-type(4){
+            min-width: 50px;
+        }
+    }
+    img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 40px;
+        border-radius: 10px;
+    }
+    tr{
+        &:first-child{
+            color: rgb(33, 43, 54);
+            background: rgb(244, 246, 248);
+        }
+    }
+    .options{
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 20px;
+        border-radius: 50%;
+    }
+}
+.list{
+    list-style: none;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-80%);
+    left: -50px;
+    li{
+        padding-bottom: 10px;
+        &:last-child{
+            padding-bottom: 0;
+        }
+        cursor: pointer;
+    }
+    margin: 0;
+    z-index: 10;
+    background: var(--white);
+    color: var(--black);
+    box-shadow: var(--shadow);
+    border-radius: 5px;
+    a{
+        color: var(--black);
+        padding-bottom: 10px;
+        display: block;
+    }
+    transition: all .3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+.list-back{
+    transform: translateY(-40%);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: visible;
+}
