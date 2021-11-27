@@ -1,6 +1,6 @@
 import Skeleton from "../components/UI/LoadingSkeleton/Skeleton";
 import styles from "../styles/RenderSkeletonProduct.module.scss";
-const RenderSkeletonProduct = (number) => {
+const RenderSkeletonProduct = (number, className) => {
   const arrayRender = [];
   for (let i = 0; i < number; i++) {
     arrayRender.push(
@@ -10,7 +10,7 @@ const RenderSkeletonProduct = (number) => {
           times={2}
           imageClassName={styles.image}
           containerSkeleton={styles.container}
-          className={styles['container-loading']}
+          className={`${styles['container-loading']} ${className ? className : ''}`}
           block
           key={i}
           isLoading={true}

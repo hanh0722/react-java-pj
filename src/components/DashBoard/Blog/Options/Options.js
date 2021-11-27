@@ -14,6 +14,8 @@ const Options = ({
   isSubmit,
   editorIsLoading,
   onPreview,
+  defaultCategory,
+  update
 }) => {
   const { toggle, changeToggleHandler } = useToggle(true);
 
@@ -22,8 +24,7 @@ const Options = ({
     changeToggleHandler();
   };
   const getCategoryByComma = (event) => {
-    const parseEvent = event.target.value.split(",");
-    setCategory(parseEvent);
+    setCategory(event.target.value);
   };
   return (
     <>
@@ -46,6 +47,7 @@ const Options = ({
               value: category,
               onChange: getCategoryByComma,
             }}
+            initialValue={defaultCategory}
             label='Category'
           >
             <FontAwesomeIcon icon={faClipboard} />
@@ -68,7 +70,7 @@ const Options = ({
             editorIsLoading && classes.disabled
           }`}
         >
-          Post
+          {update ? "Change" : "Post"}
         </Button>
       </div>
     </>

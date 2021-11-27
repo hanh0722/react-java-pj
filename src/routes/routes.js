@@ -123,6 +123,7 @@ export const RoutesConfig = [
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[1].path}`,
     component: BlogDashboard,
+    exact: true
   },
   {
     path: `${DASHBOARD}${DASHBOARD_MATERIAL.ADMIN[4].path}`,

@@ -9,15 +9,16 @@ import { key_multer } from "../../util/key-server";
 import useAxios from "../../hook/use-axios";
 import { useDispatch } from "react-redux";
 import { NotifyActions } from "../store/NotifyAfterLogin/NotifyAfterLogin";
-import { v4 as uuid } from "uuid";
+import { v4 as uuid, v4 } from "uuid";
 const DropzoneUpload = forwardRef(
-  ({ getFileOfDrop, title, maxFiles, config, setFileIsUploading }, ref) => {
+  ({ getFileOfDrop, title, maxFiles, config, setFileIsUploading, defaultImage }, ref) => {
     const [imageUpload, setImageUpload] = useState([]);
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
       accept: "image/*",
       maxFiles: maxFiles || 5,
       ...config,
     });
+    const [isDefaultChanged, setIsDefaultChanged] = useState(false);
     const dispatch = useDispatch();
     const { isLoading, error, data, fetchDataFromServer } = useAxios();
     const removeItemHandler = (id) => {
@@ -28,6 +29,7 @@ const DropzoneUpload = forwardRef(
         getFileOfDrop(filterImageArray);
       }
       setImageUpload(filterImageArray);
+      setIsDefaultChanged(true);
     };
     useEffect(() => {
       const getImageUploadByLinks = acceptedFiles.map((file, index) => {
@@ -41,6 +43,18 @@ const DropzoneUpload = forwardRef(
       }
       setImageUpload(getImageUploadByLinks);
     }, [acceptedFiles, getFileOfDrop]);
+    useEffect(() => {
+      if(!defaultImage || isDefaultChanged){
+        return;
+      }
+      const allDefaults = defaultImage.map(item => {
+        return {
+          id: v4(),
+          url: item
+        }
+      });
+      setImageUpload(allDefaults);
+    }, [defaultImage, isDefaultChanged]);
     useEffect(() => {
       if (acceptedFiles.length === 0) {
         return;

@@ -1,0 +1,27 @@
+.grid{
+    margin-top: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    div{
+        &:first-child{
+            grid-column: span 2;
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .grid{
+        grid-template-columns: repeat(1, 1fr);
+        div{
+            &:first-child{
+                grid-column: span 1;
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useMemo, useCallback } from "react";
+import React, { useState, forwardRef, useMemo, useCallback, useEffect } from "react";
 import ReactQuill from "react-quill";
 import QuillToolbar, {
   formats,
@@ -8,8 +8,8 @@ import QuillToolbar, {
 } from "./QuillToolbar";
 import turnImageToBase64 from "../../../../util/base64-image";
 import "react-quill/dist/quill.snow.css";
-const Editor = forwardRef(({ focusEditorHandler, getValue, setIsLoadingUpload, placeholder }, ref) => {
-  const [value, setValue] = useState("");
+const Editor = forwardRef(({ focusEditorHandler, getValue, setIsLoadingUpload, placeholder, defaultValue }, ref) => {
+  const [value, setValue] = useState('');
   const getValueFromEditor = (content, delta, source, editor) => {
     setValue(content);
     getValue(editor.getHTML());
@@ -51,6 +51,12 @@ const Editor = forwardRef(({ focusEditorHandler, getValue, setIsLoadingUpload, p
       },
     };
   }, [imageHandler]);
+  useEffect(() => {
+    if(!defaultValue){
+      return;
+    }
+    setValue(defaultValue);
+  }, [defaultValue]);
   return (
     <>
       <QuillToolbar />

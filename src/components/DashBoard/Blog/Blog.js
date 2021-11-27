@@ -13,6 +13,10 @@ const Blog = ({
   setDescriptionHandler,
   getFileOfDropzone,
   setImageIsLoading,
+  initialTitle,
+  initialDescription,
+  defaultEditor,
+  imageDefault
 }) => {
   const editorRef = useRef();
   const setValueEditorHandler = (htmlContent) => {
@@ -31,9 +35,11 @@ const Blog = ({
           placeholder: "Blog Title",
           id: "Title",
           onChange: setTitleHandler,
+          
         }}
         error="Blog must have title"
         label="Title"
+        initialValue={initialTitle}
       >
         <FontAwesomeIcon icon={faHeading} />
       </Input>
@@ -47,8 +53,10 @@ const Blog = ({
           id: "short_description",
           onChange: setDescriptionHandler,
         }}
+        initialValue={initialDescription}
         error="Blog must have short description"
         label="Short Description"
+        
       >
         <FontAwesomeIcon icon={faPenAlt} />
       </Input>
@@ -58,6 +66,7 @@ const Blog = ({
         getValue={setValueEditorHandler}
         setIsLoadingUpload={setImageIsLoading}
         placeholder="Write some awesome content"
+        defaultValue={defaultEditor}
       />
       <label className="pt-3">Cover Image (Outside Blog)</label>
       <DropzoneUpload
@@ -65,6 +74,7 @@ const Blog = ({
         config={{ multiple: false }}
         title="Upload Image for content outside (1 image)"
         getFileOfDrop={getFileOfDropzone}
+        defaultImage={imageDefault ? [imageDefault] : null}
       />
     </div>
   );

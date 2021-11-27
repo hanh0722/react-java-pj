@@ -1,0 +1,106 @@
+@import '../../../constant/variable';
+.image{
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    height: 400px;
+}
+.container, .link{
+    position: relative;
+    color: $white;
+}
+.content{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    background: rgba($color: #000000, $alpha: .5);
+    border-radius: 10px;
+    color: $white;
+    .text{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 20px;
+        font-size: $fs-md;
+        z-index: 100;
+        p{
+            @include show-n-line(1);
+            text-transform: capitalize;
+        }
+        .date{
+            font-size: 14px;
+            color: rgb(145, 158, 171);
+            padding-bottom: 15px;
+        }
+    }
+}
+.list{
+    list-style: none;
+    padding-left: 0;
+    width: 100px;
+    position: absolute;
+    right: 0;
+    font-size: 14px;
+    background: rgba($color: $white, $alpha: .75);
+    color: $black;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 0;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    a{
+        color: $black !important;
+        display: block;
+        padding-bottom: 12px;
+        &:hover{
+            color: $brown !important;
+        }
+    }
+    svg{
+        font-size: 14px;
+    }
+}
+.show{
+    pointer-events: visible;
+    visibility: visible;
+    opacity: 1;
+    height: 80px;
+}
+.color{
+    color: $brown;
+}
+.avatar{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    border-radius: 50%;
+    img{
+        border-radius: 50%;
+    }
+}
+.options{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 10px;
+    z-index: 100;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+@media screen and (max-width: 768px) {
+    .image{
+        height: 300px;
+    }
+}

@@ -3,5 +3,64 @@
     input{
         padding-right: 40px !important;
         font-size: $fs-sm;
+        background: transparent;
+            color: var(--black);
+    }
+}
+
+.list{
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    padding: 10px;
+    font-size: $fs-sm;
+    li{
+        padding-bottom: 10px;
+        &:last-child{
+            padding-bottom: 0;
+        }
+    }
+    margin: 0;
+    overflow: scroll;
+    word-break: break-word;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all .3s ease-in-out;
+    transform: translateY(20%);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--black);
+}
+.show{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: visible;
+    box-shadow: var(--shadow);
+    transform: translateY(0);
+}
+.button{
+    background: var(--button-green) !important;
+    color: $white !important;
+}
+.content{
+    text-transform: capitalize;
+}
+
+@media screen and (max-width: 768px) {
+    .input{
+        input{
+            padding-right: 30px !important;
+            svg{
+                font-size: 12px;
+            }
+            &::placeholder{
+                font-size: 12px;
+            }
+        }
+    }
+    .button{
+        padding: 5px 10px !important;
+        font-size: $fs-sm !important;
     }
 }

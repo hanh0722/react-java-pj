@@ -90,3 +90,9 @@ a {
 .MuiInput-underline:after{
   border-color: var(--btn-quantity) !important;
 }
+
+.empty--grid{
+  grid-template-columns: repeat(1, 1fr);
+  height: 50vh;
+  align-items: center;
+}
