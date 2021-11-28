@@ -29,7 +29,9 @@ const DropzoneUpload = forwardRef(
         getFileOfDrop(filterImageArray);
       }
       setImageUpload(filterImageArray);
-      setIsDefaultChanged(true);
+      if(defaultImage){
+        setIsDefaultChanged(true);
+      }
     };
     useEffect(() => {
       const getImageUploadByLinks = acceptedFiles.map((file, index) => {

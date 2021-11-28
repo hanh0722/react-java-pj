@@ -30,6 +30,13 @@
         color: rgb(34, 154, 22);
         padding: 5px;
         border-radius: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: .5px;
+    }
+    .out{
+        color: rgb(183, 33, 54);
+        background: rgba(255, 72, 66, 0.16);
     }
     th{
         &:first-child{
@@ -105,4 +112,21 @@
     visibility: visible;
     opacity: 1;
     pointer-events: visible;
+}
+.pagination{
+    padding-top: 20px;
+    .btn{
+        width: 30px;
+        height: 30px;
+        font-size: $fs-md;
+        cursor: pointer;
+    }
+    span{
+        font-size: $fs-sm;
+        margin: 0 15px;
+    }
+    .disabled{
+        pointer-events: none;
+        opacity: 0.5;
+    }
 }

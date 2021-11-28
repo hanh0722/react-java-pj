@@ -13,7 +13,16 @@ import {
   TYPE_DISPATCH,
 } from "../../../store/UploadProduct/UploadProduct";
 import FetchTypeProduct from "../FetchTypeProduct/FetchTypeProduct";
-const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
+const ProductOptions = ({
+  onSubmit,
+  isLoading,
+  isLoadingUpload,
+  defaultType,
+  defaultRegular,
+  defaultSale,
+  defaultInStock,
+  isEdit
+}) => {
   const dispatch = useDispatch();
   const { toggle, setToggle } = useToggle(true);
   const { toggle: selectToggle, changeToggleHandler: selectChangeToggle } =
@@ -37,6 +46,21 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
     );
   };
 
+  useEffect(() => {
+    if (defaultType) {
+      setValueInput(defaultType);
+    }
+    if (defaultRegular) {
+      setRegularPrice(defaultRegular);
+    }
+    if (defaultSale) {
+      setPercent(defaultSale);
+    }
+    if(defaultInStock){
+      setToggle(defaultInStock);
+    }
+  }, [defaultType, defaultRegular, defaultSale, defaultInStock, setToggle]);
+  console.log(isEdit);
   const setValueToInput = (name) => {
     setValueInput(name.toUpperCase());
     selectChangeToggle();
@@ -111,7 +135,7 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
         />
       </CategorySelect>
       <Input
-        functionCondition={(value) => value.trim().length > 0}
+        functionCondition={(value) => true}
         input={{
           id: "regular-price",
           type: "number",
@@ -123,6 +147,7 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
         label="Regular Price"
         className={styles.input}
         error="Price is required"
+        initialValue= {defaultRegular || ''}
       />
       <div className={styles.sale}>
         <label htmlFor="sale-percent">Sale Percent (Not required)</label>
@@ -159,7 +184,7 @@ const ProductOptions = ({ onSubmit, isLoading, isLoadingUpload }) => {
         type="submit"
         variant="contained"
       >
-        {isLoading ? "Uploading" : "Create Product"}
+        {isLoading ? "Uploading" : (isEdit ? "Update Product" : "Create Product")}
       </Button>
     </BoxContainer>
   );

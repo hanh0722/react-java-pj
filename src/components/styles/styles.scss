@@ -334,6 +334,29 @@ input[type='number']{
     @include fade-effect-start();
     @include transition(500, ease-in-out);
 }
+@mixin start-height {
+    height: 0px;
+    opacity: 0;
+}
+@mixin finish-height {
+    height: 150px;
+    opacity: 1;
+}
+
+.show-enter{
+    @include start-height();
+}
+.show-enter-active{
+    @include finish-height();
+    transition: all .75s ease-in-out;
+}
+.show-exit{
+    @include finish-height();
+}
+.show-exit-active{
+    @include start-height();
+    transition: all .75s ease-in-out;
+}
 @keyframes active-pagination {
     0%{
         opacity: 0;

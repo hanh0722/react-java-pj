@@ -20,6 +20,12 @@ const initialState = {
   inStock: true,
 };
 
+const helperCalculate = (salePercent, regularPrice) => {
+  if (salePercent === 0) {
+    return regularPrice;
+  }
+  return (+regularPrice - (+regularPrice * +salePercent) / 100).toFixed(2);
+};
 const uploadProductSlice = createSlice({
   name: "upload-product",
   initialState: initialState,
@@ -51,14 +57,17 @@ const uploadProductSlice = createSlice({
         default:
           return state;
       }
-      if (state.salePercent === 0) {
-        state.lastPrice = state.regularPrice;
-      } else {
-        state.lastPrice = (
-          +state.regularPrice -
-          (+state.regularPrice * +state.salePercent) / 100
-        ).toFixed(2);
-      }
+      state.lastPrice = helperCalculate(state.salePercent, state.regularPrice);
+    },
+    setValueProduct(state, action) {
+      state.title = action.payload.title || '';
+      state.description = action.payload.description || '';
+      state.image = action.payload.imageUrls || [];
+      state.inStock = action.payload.inStock || true;
+      state.type = action.payload.category || null;
+      state.regularPrice = action.payload.regularPrice || null;
+      state.salePercent = action.payload.salePercent || 0;
+      state.lastPrice = action.payload.lastPrice || helperCalculate(state.salePercent, state.regularPrice);
     },
   },
 });

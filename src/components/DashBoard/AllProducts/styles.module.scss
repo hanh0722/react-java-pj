@@ -52,3 +52,21 @@
     }
     cursor: pointer;
 }
+.list{
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 0;
+    width: 100%;
+    font-size: $fs-sm;
+    a{
+        color: var(--black);
+    }
+    height: 150px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 5px;
+    li{
+        padding-bottom: 10px;
+    }
+    overflow: hidden;
+}

@@ -11,7 +11,7 @@ import {
   uploadActions,
   TYPE_DISPATCH,
 } from "../../../store/UploadProduct/UploadProduct";
-const Form = ({ setFileHandler, setIsLoadingUpload, setFileIsUploading }) => {
+const Form = ({ setFileHandler, setIsLoadingUpload, setFileIsUploading, initialTitle, defaultValueEditor, defaultImage }) => {
   const editorRef = useRef();
   const dispatch = useDispatch();
   const focusEditorHandler = () => {
@@ -44,6 +44,7 @@ const Form = ({ setFileHandler, setIsLoadingUpload, setFileIsUploading }) => {
         }}
         label="Title"
         error="Title must be filled"
+        initialValue={initialTitle}
       >
         <FontAwesomeIcon icon={faSignature} />
       </Input>
@@ -54,9 +55,10 @@ const Form = ({ setFileHandler, setIsLoadingUpload, setFileIsUploading }) => {
         focusEditorHandler={focusEditorHandler}
         getValue={getValueOfEditor}
         setIsLoadingUpload={setIsLoadingUpload}
+        defaultValue={defaultValueEditor}
       />
       <label className="pt-3">Upload Image</label>
-      <DropzoneUpload setFileIsUploading={setFileIsUploading} getFileOfDrop={setFileHandler} />
+      <DropzoneUpload setFileIsUploading={setFileIsUploading} getFileOfDrop={setFileHandler} defaultImage={defaultImage ? defaultImage : null} />
     </div>
   );
 };
