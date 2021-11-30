@@ -18,6 +18,7 @@ import {
   DASHBOARD_MATERIAL,
   DASHBOARD,
   BLOG_DETAIL,
+  SUCCESS_CHECKOUT
 } from "../components/link/link";
 import AllProducts from "../views/Dashboard/AllProducts";
 import {
@@ -41,7 +42,8 @@ import {
   UserInformation,
   BlogDashboard,
   DetailBlog,
-  AllBlogs
+  AllBlogs,
+  SuccessCheckout
 } from "../views/ViewConfig/ViewConfig";
 export const RoutesConfig = [
   {
@@ -100,6 +102,11 @@ export const RoutesConfig = [
   {
     path: CHECK_OUT_PAGE,
     component: Checkout,
+    exact: true
+  },
+  {
+    path: SUCCESS_CHECKOUT,
+    component: SuccessCheckout
   },
   {
     path: RESET_PASSWORD_VERIFY,

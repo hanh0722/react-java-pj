@@ -39,7 +39,6 @@ const SwiperBlog = () => {
         swiper.navigation.update();
       }}
       className={styles.swiper}
-      onSlideChange={(event) => console.log(event.slides.eq(event.activeIndex))}
       loop={true}
       pagination={{
         clickable: true,
@@ -49,6 +48,7 @@ const SwiperBlog = () => {
           "swiper-pagination-clickable swiper-clickable-container",
       }}
       autoplay={{ delay: 5000 }}
+      speed={1000}
       slidesPerView={1}
       
     >

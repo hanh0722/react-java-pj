@@ -1,0 +1,23 @@
+
+.container{
+    text-align: center;
+    img{
+        max-width: 500px;
+        height: auto;
+    }
+    line-height: 40px;
+    .button{
+        margin-top: 20px;
+        background: var(--brown) !important;
+        color: var(--white) !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container{
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}

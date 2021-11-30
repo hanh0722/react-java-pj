@@ -1,12 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styles from './InvoiceLayout.module.scss';
-const InvoiceLayout = () => {
+const InvoiceLayout = ({url, time}) => {
   return (
     <div className={`d-flex justify-content-between align-items-center ${styles.container}`}>
-      <p>{new Date().toLocaleDateString("vi-vn")}</p>
-      <p>$16.61</p>
-      <Link to="/">PDF</Link>
+      <p>{new Date(time).toLocaleDateString("vi-vn")}</p>
+      <a href={url} target={"_blank"} rel="noreferrer">PDF</a>
     </div>
   );
 };

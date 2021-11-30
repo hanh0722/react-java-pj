@@ -54,7 +54,7 @@ const Cart = ({ cart, isLoadingCart, total, discount }) => {
                     productName={item.name}
                     url={item.imageUrl}
                     price={item.price}
-                    total={Math.round((item.price * item.quantity) * 100) / 100}
+                    total={Math.round(item.price * item.quantity * 100) / 100}
                     quantity={item.quantity}
                     productType={item.type}
                   />

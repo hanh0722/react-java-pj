@@ -95,7 +95,7 @@ const AllBlogs = () => {
       {!isLoading && error && <Redirect to={NOT_FOUND} />}
       <Container>
         <Header />
-        <GridBlogs className="empty--grid">
+        <GridBlogs>
           {isLoading && RenderSkeletonProduct(8)}
           {!isLoading &&
             post &&

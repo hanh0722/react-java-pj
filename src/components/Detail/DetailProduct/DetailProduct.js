@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { Button } from "@material-ui/core";
 import Methods from "../Methods/Methods";
 import Delivery from "../LayoutDelivery/Delivery";
@@ -14,6 +13,7 @@ import useCart from "../../../hook/use-cart";
 import { useDispatch } from "react-redux";
 import { CartActions } from "../../store/cart";
 import { NotifyActions } from "../../store/NotifyAfterLogin/NotifyAfterLogin";
+import { faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 const DetailProduct = ({
   product,
   changeToggleHandler,
@@ -75,7 +75,7 @@ const DetailProduct = ({
           <div
             className={`${styles.wishlist} d-flex justify-content-center align-items-center`}
           >
-            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faCompressAlt}/>
           </div>
         </div>
         <div className={styles.price}>
@@ -140,16 +140,17 @@ const DetailProduct = ({
               </div>
               <div className={styles["btn__add"]}>
                 <Button
+                  disabled={!product?.inStock}
                   onClick={() => addCartHandler(quantity, product.id)}
                   variant="outlined"
                 >
-                  Add To Cart
+                  {!product?.inStock ? "Out of product" : "Add To Cart"}
                 </Button>
               </div>
             </div>
             <div className={`${styles.space} w-100`}>
               <Link to="/checkout">
-                <Button className="w-100" variant="contained">
+                <Button disabled={!product?.inStock} className="w-100" variant="contained">
                   Buy it now!
                 </Button>
               </Link>
